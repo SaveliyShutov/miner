@@ -13,6 +13,7 @@
     "@nuxt/devtools": "latest",
     "@nuxt/scripts": "^0.5.1",
     "@nuxt/ui": "^2.17.0",
+    "@nuxtjs/color-mode": "^3.4.1",
     "@types/node-telegram-bot-api": "^0.64.6",
     "nuxt": "^3.12.1"
   }

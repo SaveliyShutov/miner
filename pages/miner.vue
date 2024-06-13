@@ -7,7 +7,6 @@ function tap() {
 
 </script>
 <template>
-
     <div class="grid grid-cols-6 gap-5">
         <div class="flex justify-center col-span-6">
             <p class="text-6xl font-medium">{{ count }} </p>
@@ -15,7 +14,7 @@ function tap() {
         <div class="flex col-span-6">
             <UMeter :ui= "{ wrapper:'w-full flex-row-reverse content-center items-center'}" :value="count" indicator>
                 <template #indicator="{ percent }">
-                    <div class="text-md">
+                    <div class="text-md font-medium">
                         {{ Math.round(percent) }}%
                     </div>
                 </template>
