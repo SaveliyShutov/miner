@@ -8,7 +8,7 @@ useHead({
   //   { name: 'og:description', content: 'PlPo:place of posters - место для ваших афиш. Спектакль, концерт, встреча, лекция, распродажа, экскурсия, кино - любое событие может стать плакатом на PlPo' },
   //   { name: 'og:image', content: 'https://plpo.ru/android-chrome-512x512.png' },
   //   { name: 'og:url', content: 'https://plpo.ru/' },
-  // ],
+  // ],  
 })
 
 </script>

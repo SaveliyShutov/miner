@@ -13,11 +13,17 @@ function tap() {
             <p class="text-6xl font-medium">{{ count }} </p>
         </div>
         <div class="flex col-span-6">
-            <UProgress :value="count" />
+            <UMeter :ui= "{ wrapper:'w-full flex-row-reverse content-center items-center'}" :value="count" indicator>
+                <template #indicator="{ percent }">
+                    <div class="text-md">
+                        {{ Math.round(percent) }}%
+                    </div>
+                </template>
+            </UMeter>
         </div>
         <div class="flex justify-center col-span-6">
             <UButton @click='tap()' :ui="{ rounded: 'rounded-full' }"
-                class="bg-gradient-to-r from-emerald-200 to-emerald-300 active:from-emerald-300 active:to-emerald-200 size-96"
+                class="bg-gradient-to-r from-emerald-200 to-emerald-300 active:from-emerald-300 active:to-emerald-200 size-80"
                 variant="soft"></UButton>
         </div>
     </div>
