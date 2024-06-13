@@ -17,7 +17,7 @@ function tap() {
         </div>
         <div class="flex justify-center col-span-6">
             <UButton @click='tap()' :ui="{ rounded: 'rounded-full' }"
-                class="bg-gradient-to-r from-emerald-200 to-emerald-300 active:from-emerald-300 to-emerald-200 size-96"
+                class="bg-gradient-to-r from-emerald-200 to-emerald-300 active:from-emerald-300 active:to-emerald-200 size-96"
                 variant="soft"></UButton>
         </div>
     </div>
