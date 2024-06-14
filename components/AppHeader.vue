@@ -14,5 +14,5 @@ const links = [
 </script>
 
 <template>
-    <UHorizontalNavigation :links="links" />
+    <UVerticalNavigation :links="links" /> 
 </template>

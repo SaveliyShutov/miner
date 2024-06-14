@@ -16,5 +16,8 @@
     "@nuxtjs/color-mode": "^3.4.1",
     "@types/node-telegram-bot-api": "^0.64.6",
     "nuxt": "^3.12.1"
+  },
+  "dependencies": {
+    "bottom-navigation-vue": "^3.3.5"
   }
 }

@@ -1,7 +1,6 @@
 <template>
     <div>
         <UContainer>
-            <AppHeader />
                 <slot />
         </UContainer>
 
