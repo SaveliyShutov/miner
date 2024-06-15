@@ -11,7 +11,7 @@ function tap() {
 
 </script>
 <template>
-    <div class="mt-4 grid grid-cols-6 gap-5">
+    <div class="mt-10 h-full grid grid-cols-6 gap-5">
         <div class="flex justify-center col-span-6">
             <UIcon name="material-symbols-light:potted-plant-outline-rounded" />
             <p class="text-6xl font-medium">{{ count }} </p>
@@ -31,7 +31,7 @@ function tap() {
                 class="bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
                 variant="soft"></UButton>
         </div>
-        <div class="mt-10 text-lg font-medium flex justify-between col-span-6">
+        <div class="h-full text-lg font-medium flex justify-between col-span-6">
             <div class="ml-5">
                 {{ energy }}
             </div>
