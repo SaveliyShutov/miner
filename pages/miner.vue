@@ -41,7 +41,7 @@ function tap() {
             </UMeter>
             <!-- <UMeter :value="35" indicator /> -->
         </div>
-        <div class="mt-5 flex align-center justify-center col-span-6">
+        <div class=" flex align-center justify-center col-span-6">
             <UButton :disabled="isWater" @click='tap()' :ui="{ rounded: 'rounded-full' }"
                 class="flex items-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
                 variant="soft"> <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
