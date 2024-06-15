@@ -14,9 +14,9 @@ function tap() {
 
 </script>
 <template>
-    <div class="mt-10 h-full grid grid-cols-6 gap-5">
+    <div class="text-white mt-10 h-full grid grid-cols-6 gap-5">
         <div class="flex align-center items-center justify-center col-span-6">
-            <p class="text-7xl font-medium">{{ count }} </p>
+            <p class="text-7xl  font-medium">{{ count }} </p>
         </div>
         <div class="flex col-span-6">
             <UMeter size="lg" :ui="{ wrapper: 'flex-row-reverse content-center items-center' }" :value="count"
