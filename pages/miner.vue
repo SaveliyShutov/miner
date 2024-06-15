@@ -1,14 +1,26 @@
 <script setup lang="ts">
+let percent = ref<number>(0)
 let count = ref<number>(0)
 let energy = ref<number>(300)
+let maxEnergy = ref<number>(energy.value)
 let level = ref<number>(1)
+let nextlevel = ref<number>(100*level.value)
+let isWater = ref<boolean>(false)
+
 
 function tap() {
-    if (energy.value >= 0) {
-        count.value += 1
-        energy.value -= 1
+    percent.value = (count.value/nextlevel.value*100)
+    if (percent.value >= 100){
+        level.value += 1
+        nextlevel.value = level.value*100
+        percent.value = (count.value/nextlevel.value*100)
+    }
+    if (energy.value > 0) {
+        count.value += 10
+        energy.value -= 10
+        
     } else {
-        alert('no more energy')
+        isWater.value = true
     }
 }
 
@@ -19,7 +31,7 @@ function tap() {
             <p class="text-7xl  font-medium">{{ count }} </p>
         </div>
         <div class="flex col-span-6">
-            <UMeter size="lg" :ui="{ wrapper: 'flex-row-reverse content-center items-center' }" :value="count"
+            <UMeter size="lg" :ui="{ wrapper: 'flex-row-reverse content-center items-center' }" :value="percent"
                 indicator>
                 <template #indicator="{ percent }">
                     <div class="text-md font-medium">
@@ -29,8 +41,8 @@ function tap() {
             </UMeter>
             <!-- <UMeter :value="35" indicator /> -->
         </div>
-        <div class="flex align-center justify-center col-span-6">
-            <UButton @click='tap()' :ui="{ rounded: 'rounded-full' }"
+        <div class="mt-5 flex align-center justify-center col-span-6">
+            <UButton :disabled="isWater" @click='tap()' :ui="{ rounded: 'rounded-full' }"
                 class="flex items-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
                 variant="soft"> <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path fill="white"
@@ -38,12 +50,12 @@ function tap() {
                 </svg>
             </UButton>
         </div>
-        <div class="h-full text-2xl font-medium flex justify-between col-span-6">
+        <div class="h-full text-2xl mt-20 font-medium flex justify-between col-span-6">
             <div class="flex align-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M11.997 21q-2.999 0-4.998-2.062Q5 16.875 5 13.803q0-1.36.62-2.74q.619-1.38 1.547-2.648q.93-1.269 2.006-2.392q1.077-1.124 2-1.956q.18-.161.393-.249q.212-.087.434-.087t.434.087t.393.25q.923.83 2 1.955q1.077 1.123 2.006 2.391t1.548 2.649t.619 2.74q0 3.072-2.002 5.135Q14.994 21 11.996 21m-.497-7.308v3.658q0 .202.199.244t.284-.123l2.358-4.56q.117-.213-.011-.408t-.343-.195H12.5V8.65q0-.202-.199-.244t-.284.123l-2.358 4.56q-.117.213.011.408t.343.195z" />
-                </svg> {{ energy }}
+                </svg> {{ energy }} / {{ maxEnergy }}
             </div>
             <div>
                 lvl {{ level }}
