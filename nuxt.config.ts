@@ -3,5 +3,5 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui", "@nuxt/scripts"],
   colorMode: {
     preference: 'dark'
-  }
+  },
 })
