@@ -8,12 +8,9 @@ function tap() {
         count.value += 1
         energy.value -= 1
     } else {
-
-
+        alert('no more energy')
     }
 }
-
-
 
 </script>
 <template>

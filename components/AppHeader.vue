@@ -2,16 +2,6 @@
 const route = useRoute()
 let router = useRouter()
 
-const links = [
-    {
-        label: 'Main',
-        icon: 'i-heroicons-clock',
-        to: '/'
-    }, {
-        label: 'Miner',
-        icon: 'i-heroicons-clock',
-        to: '/miner'
-    },]
 </script>
 
 <template>
@@ -27,7 +17,7 @@ const links = [
                 <span
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500">Home</span>
             </button>
-            <button type="button"
+            <button type="button"  @click="router.push('/garden')"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg class="w-6 h-6 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 24">
@@ -37,7 +27,7 @@ const links = [
                 <span
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500">Garden</span>
             </button>
-            <button type="button"
+            <button type="button"  @click="router.push('/friends')"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg class="w-6 h-6 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 24">
@@ -47,9 +37,9 @@ const links = [
                         d="M21 17c0 1.657-2.036 3-4.521 3c.732-.8 1.236-1.805 1.236-2.998c0-1.195-.505-2.2-1.239-3.001C18.962 14 21 15.344 21 17M18 6a3 3 0 0 1-4.029 2.82A5.688 5.688 0 0 0 14.714 6c0-1.025-.27-1.987-.742-2.819A3 3 0 0 1 18 6.001" />
                 </svg>
                 <span
-                    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500">Frends</span>
+                    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500">Friends</span>
             </button>
-            <button type="button"
+            <button type="button"  @click="router.push('/wallet')"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-500"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
