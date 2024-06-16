@@ -1,38 +1,60 @@
 <script setup lang="ts">
 let percent = ref<number>(0)
 let count = ref<number>(0)
-let energy = ref<number>(300)
+let energy = ref<number>(30000)
 let maxEnergy = ref<number>(energy.value)
-let level = ref<number>(1)
-let nextlevel = ref<number>(100*level.value)
+let currentLevel = ref<number>(1)
 let isWater = ref<boolean>(false)
+let click = ref<number>(1)
+
+let levels = ref([
+    { level: 2, count: 100 },
+    { level: 3, count: 300 },
+    { level: 4, count: 1000 },
+    { level: 5, count: 3000 },
+    { level: 6, count: 5000 },
+    { level: 7, count: 10000 }
+])
 
 
 function tap() {
-    percent.value = (count.value/nextlevel.value*100)
-    if (percent.value >= 100){
-        level.value += 1
-        nextlevel.value = level.value*100
-        percent.value = (count.value/nextlevel.value*100)
+    let nextLevel = levels.value[currentLevel.value - 1]
+    percent.value = (count.value / nextLevel.count * 100)
+    if (count.value >= nextLevel.count) {
+        currentLevel.value += 1
     }
+
     if (energy.value > 0) {
-        count.value += 10
-        energy.value -= 10
-        
+        count.value += click.value
+        energy.value -= click.value
+
     } else {
         isWater.value = true
     }
 }
 
+function update() {
+    let nextLevel = levels.value[currentLevel.value - 1]
+    if (count.value >= 100) {
+        click.value += 1
+        count.value -= 100
+        percent.value = (count.value / nextLevel.count * 100)
+    }
+}
+
 declare const window: any;
 
-onMounted(()=>{
-    
+onBeforeUnmount(() => {
+    console.log(count.value)
 })
-
 </script>
 <template>
-    <div class="text-white mt-10 h-full grid grid-cols-6 gap-5">
+    <div class="flex mt-4 flex-row justify-between">
+        <div class="text-base">lvl {{ currentLevel }}</div>
+        <div> {{ click }}</div>
+        <div>{{ levels[currentLevel - 1].count }}</div>
+    </div>
+    <div class="text-white h-full grid grid-cols-6 gap-5">
         <div class="flex align-center items-center justify-center col-span-6">
             <p class="text-7xl  font-medium">{{ count }} </p>
         </div>
@@ -47,7 +69,7 @@ onMounted(()=>{
             </UMeter>
             <!-- <UMeter :value="35" indicator /> -->
         </div>
-        <div class=" flex align-center justify-center col-span-6">
+        <div class="mt-3 flex align-center justify-center col-span-6">
             <UButton :disabled="isWater" @click='tap()' :ui="{ rounded: 'rounded-full' }"
                 class="flex items-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
                 variant="soft"> <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -56,7 +78,7 @@ onMounted(()=>{
                 </svg>
             </UButton>
         </div>
-        <div class="h-full text-2xl mt-16 font-medium flex justify-between col-span-6">
+        <div class="h-full text-2xl mt-10 font-medium flex justify-between items-center col-span-6">
             <div class="flex align-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -64,7 +86,9 @@ onMounted(()=>{
                 </svg> {{ energy }} / {{ maxEnergy }}
             </div>
             <div>
-                lvl {{ level }}
+                <UButton @click='update()' class="text-lg bg-gradient-to-r from-pink-500 to-yellow-500 ">
+                    <p class="text-white">update</p>
+                </UButton>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@ let router = useRouter()
 </script>
 
 <template>
-    <div class="fixed bottom-0 bg-black left-0 z-50 w-full h-16">
+    <div class="fixed bottom-0 left-0 z-50 w-full h-16">
         <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             <button @click="router.push('/miner')" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
