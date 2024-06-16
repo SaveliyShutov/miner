@@ -23,10 +23,10 @@ function tap() {
         isWater.value = true
     }
 }
+
 declare const window: any;
 
 onMounted(()=>{
-    alert(window.Telegram.WebApp.WebAppUser)
     
 })
 
@@ -56,7 +56,7 @@ onMounted(()=>{
                 </svg>
             </UButton>
         </div>
-        <div class="h-full text-2xl mt-20 font-medium flex justify-between col-span-6">
+        <div class="h-full text-2xl mt-16 font-medium flex justify-between col-span-6">
             <div class="flex align-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                     <path fill="currentColor"
