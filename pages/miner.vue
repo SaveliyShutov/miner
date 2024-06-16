@@ -23,6 +23,12 @@ function tap() {
         isWater.value = true
     }
 }
+declare const window: any;
+
+onMounted(()=>{
+    alert(window.Telegram.WebApp.WebAppUser)
+    
+})
 
 </script>
 <template>
