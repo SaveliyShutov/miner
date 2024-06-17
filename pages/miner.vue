@@ -49,9 +49,9 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-    <div class="flex mt-4 flex-row justify-between">
+    <div class="flex mt-4 text-white flex-row justify-between">
         <div class="text-base">lvl {{ currentLevel }}</div>
-        <div> {{ click }}</div>
+        <div>tap {{ click }}</div>
         <div>{{ levels[currentLevel - 1].count }}</div>
     </div>
     <div class="text-white h-full grid grid-cols-6 gap-5">
