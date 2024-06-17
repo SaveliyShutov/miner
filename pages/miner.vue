@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { _padding } from '#tailwind-config/theme';
+
 let percent = ref<number>(0)
 let count = ref<number>(0)
 let energy = ref<number>(30000)
@@ -49,13 +51,29 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-    <div class="flex mt-4 text-white flex-row justify-between">
-        <div class="text-base">lvl {{ currentLevel }}</div>
-        <div>tap {{ click }}</div>
-        <div>{{ levels[currentLevel - 1].count }}</div>
+    <div class="grid grid-cols-3 gap-2 mt-2">
+        <div class="text-base">
+            <UCard class="text-center text-sm" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Your level <br>
+                <p class="font-bold text-lg">{{ currentLevel }}</p>
+            </UCard>
+        </div>
+        <div class="text-base">
+            <UCard class="text-center text-sm" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Per click <br>
+                <p class="font-bold text-lg">{{ click }}</p>
+            </UCard>
+        </div>
+        <div class="text-base">
+            <UCard class="text-center text-sm" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Next level <br>
+                <p class="font-bold text-lg">{{ levels[currentLevel - 1].count }}</p>
+            </UCard>
+        </div>
     </div>
-    <div class="text-white h-full grid grid-cols-6 gap-5">
+    <div class="text-white h-full mt-3 grid grid-cols-6 gap-5">
         <div class="flex align-center items-center justify-center col-span-6">
+            <svg class="size-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M8.04 16.34c1.01-2.51 2.15-5.38 6.46-6.34c0 0-5 0-6.62 4.63c0 0-.88-.88-.88-1.88s1-3.12 3.5-3.62c.71-.13 1.5-.26 2.28-.37c1.97-.26 3.86-.54 4.22-1.26c0 0-1.5 8.5-7 8.5c-.18 0-.43-.06-.67-.15L8.86 17l-.95-.33zM12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2" />
+            </svg>
             <p class="text-7xl  font-medium">{{ count }} </p>
         </div>
         <div class="flex col-span-6">
@@ -72,13 +90,10 @@ onBeforeUnmount(() => {
         <div class="mt-3 flex align-center justify-center col-span-6">
             <UButton :disabled="isWater" @click='tap()' :ui="{ rounded: 'rounded-full' }"
                 class="flex items-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
-                variant="soft"> <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="white"
-                        d="M8.04 16.34c1.01-2.51 2.15-5.38 6.46-6.34c0 0-5 0-6.62 4.63c0 0-.88-.88-.88-1.88s1-3.12 3.5-3.62c.71-.13 1.5-.26 2.28-.37c1.97-.26 3.86-.54 4.22-1.26c0 0-1.5 8.5-7 8.5c-.18 0-.43-.06-.67-.15L8.86 17l-.95-.33zM12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2" />
-                </svg>
+                variant="soft">
             </UButton>
         </div>
-        <div class="h-full text-2xl mt-10 font-medium flex justify-between items-center col-span-6">
+        <div class="h-full text-2xl mt-5 font-medium flex justify-between items-center col-span-6">
             <div class="flex align-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                     <path fill="currentColor"
