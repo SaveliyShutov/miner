@@ -84,16 +84,16 @@ onBeforeUnmount(() => {
                     </template>
                 </UMeter>
             </div>
-            <div @click="tap()" class="mt-3 flex align-center justify-center col-span-6">
-                <UButton :disabled="isWater" :ui="{ rounded: 'rounded-full' }"
-                    class="flex items-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 size-64"
-                    variant="soft">
-                    <img src="../assets//images/farmer.png" alt="farmer">
-                </UButton>
-            </div>
         </div>
     </div>
-    <div class="text-2xl fixed left-0 right-0 bottom-28 w-full font-medium flex justify-between items-center">
+    <div @click="tap()" class="click mt-4 flex align-center justify-center">
+        <UButton :disabled="isWater" :ui="{ rounded: 'rounded-full' }"
+            class="img flex align-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 "
+            variant="soft">
+            <img class="rounded-full" src="../assets/images/farmer.png">
+        </UButton>
+    </div>
+    <div class="text-2xl fixed left-0 right-0 bottom-24 w-full font-medium flex justify-between items-center">
         <div class="ml-4 flex align-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -109,5 +109,21 @@ onBeforeUnmount(() => {
 
 </template>
 <style>
-/* @import url("~/assets/css/font.scss"); */
+.img {
+    max-height: 20rem;
+    max-width: 20rem;
+}
+
+@media (max-height: 660px) {
+    .img {
+        max-height: 15rem;
+        max-width: 15rem;
+    }
+}
+@media (min-height: 800px) {
+    .img {
+        max-height: 22rem;
+        max-width: 22rem;
+    }
+}
 </style>
