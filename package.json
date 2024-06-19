@@ -18,6 +18,7 @@
     "nuxt": "^3.12.1"
   },
   "dependencies": {
-    "bottom-navigation-vue": "^3.3.5"
+    "bottom-navigation-vue": "^3.3.5",
+    "vue3-touch-events": "^4.1.8"
   }
 }

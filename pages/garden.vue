@@ -1,36 +1,46 @@
 <script setup>
 </script>
 <template>
-    <div class="mt-4 text-md grid grid-cols-2 gap-4">
-        <UCard>
-            <template #header>
-                <div class="flex flex-row justify-around content-center">
-                    <p class="font-bold text-lg">подсолнух</p>
-                    <UPopover>
-                        <UButton variant="link" class="mt-1" :padded="false" color="white"
-                            trailing-icon="i-heroicons-ellipsis-vertical-16-solid" />
-                            <template #panel>
-                            <div>
-                                иди на хуй
-                            </div>
-                            </template>
-                    </UPopover>
-                </div>
-            </template>
-            <p>12 в час</p>
-        </UCard>
-        <UCard>
-            <template #header>
-                <p class="font-bold text-lg">марковка</p>
-
-            </template>
-            3 в час
-        </UCard>
-        <UCard>
-            <template #header>
-                <p class="font-bold text-lg">капуста</p>
-            </template>
-            8 в час
-        </UCard>
+    <div class="w-full h-full bg-yellow-700">
+        <table class="mt-4 border-collapse border-4 w-full border-8 border-yellow-700">
+            <tbody>
+                <tr class="grid grid-cols-6">
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                </tr>
+                <tr class="grid grid-cols-6">
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                </tr>
+                <tr class="grid grid-cols-6">
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                </tr>
+                <tr class="grid grid-cols-6">
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                    <td class=""><div class="h-16 bg-amber-900"></div></td>
+                </tr>
+            </tbody>
+            </table>
     </div>
 </template>
+
+<style>
+
+</style>
