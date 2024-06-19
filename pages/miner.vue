@@ -5,10 +5,10 @@ let router = useRouter()
 let percent = ref<number>(0)
 let count = ref<number>(0)
 let energy = ref<number>(1000)
-let maxEnergy = ref<number>(energy.value)
 let currentLevel = ref<number>(1)
 let isWater = ref<boolean>(false)
 let click = ref<number>(1)
+let maxEnergy = ref<number>(1000+500*currentLevel.value)
 
 let levels = ref([
     { level: 2, count: 100 },
@@ -16,7 +16,11 @@ let levels = ref([
     { level: 4, count: 1000 },
     { level: 5, count: 3000 },
     { level: 6, count: 5000 },
-    { level: 7, count: 10000 }
+    { level: 7, count: 10000 },
+    { level: 8, count: 25000 },
+    { level: 9, count: 50000 },
+    { level: 10, count: 100000 },
+    
 ])
 
 
@@ -37,28 +41,37 @@ function tap() {
 }
 
 declare const window: any;
+onMounted(()=>{
+    count.value = Number(localStorage.getItem('count')) ? Number(localStorage.getItem('count')) : 0
+    click.value = Number(localStorage.getItem('click')) ? Number(localStorage.getItem('click')) : 1
+    energy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water'))*500+1000 : 1000
+    maxEnergy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water'))*500+1000 : 1000
+    currentLevel.value = Number(localStorage.getItem('currentLevel')) ? Number(localStorage.getItem('currentLevel')) : 1
 
+})
 onBeforeUnmount(() => {
-    console.log(count.value)
+    localStorage.setItem('count', count.value.toString())
+    localStorage.setItem('currentLevel', currentLevel.value.toString())
+    
 })
 </script>
 <template>
     <div class="grid grid-cols-3 gap-2 mt-2">
         <div class="text-base">
-            <UCard class="bg-gray-900 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Your
+            <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Your
                 level
                 <br>
                 <p class="font-bold text-lg">{{ currentLevel }}</p>
             </UCard>
         </div>
         <div class="text-base">
-            <UCard class="bg-gray-900 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Per click
+            <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Per click
                 <br>
                 <p class="font-bold text-lg">{{ click }}</p>
             </UCard>
         </div>
         <div class="text-base">
-            <UCard class="bg-gray-900 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Next
+            <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Next
                 level
                 <br>
                 <p class="font-bold text-lg">{{ levels[currentLevel - 1].count }}</p>
@@ -101,7 +114,7 @@ onBeforeUnmount(() => {
             </svg> {{ energy }} / {{ maxEnergy }}
         </div>
         <div class="mr-4">
-            <UButton @click="router.push('/update')" class="text-lg bg-gradient-to-r from-pink-500 to-yellow-500 ">
+            <UButton @click="router.push({ path: '/update', query: { count: count } })" class="text-lg bg-gradient-to-r from-pink-500 to-yellow-500 ">
                 <p class="text-white">update</p>
             </UButton>
         </div>
@@ -109,12 +122,15 @@ onBeforeUnmount(() => {
 
 </template>
 <style>
+.click:active {
+  transform: scale(1.01);
+}
 .img {
-    max-height: 20rem;
-    max-width: 20rem;
+    max-height: 18rem;
+    max-width: 18rem;
 }
 
-@media (max-height: 660px) {
+@media (max-height: 600px) {
     .img {
         max-height: 15rem;
         max-width: 15rem;
