@@ -8,7 +8,9 @@ let energy = ref<number>(1000)
 let currentLevel = ref<number>(1)
 let isWater = ref<boolean>(false)
 let click = ref<number>(1)
-let maxEnergy = ref<number>(1000+500*currentLevel.value)
+let maxEnergy = ref<number>(1000 + 500 * currentLevel.value)
+
+let visible = ref<boolean>(false)
 
 let levels = ref([
     { level: 2, count: 100 },
@@ -20,7 +22,7 @@ let levels = ref([
     { level: 8, count: 25000 },
     { level: 9, count: 50000 },
     { level: 10, count: 100000 },
-    
+
 ])
 
 
@@ -29,9 +31,10 @@ function tap() {
     percent.value = (count.value / nextLevel.count * 100)
     if (count.value >= nextLevel.count) {
         currentLevel.value += 1
+        visible.value = !visible.value
     }
 
-    if (energy.value > 0) {
+    if (energy.value - click.value > 0) {
         count.value += click.value
         energy.value -= click.value
 
@@ -40,19 +43,26 @@ function tap() {
     }
 }
 
-declare const window: any;
-onMounted(()=>{
+function closeModal(){
+    visible.value = !visible.value
+}
+
+
+onMounted(() => {
+
     count.value = Number(localStorage.getItem('count')) ? Number(localStorage.getItem('count')) : 0
     click.value = Number(localStorage.getItem('click')) ? Number(localStorage.getItem('click')) : 1
-    energy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water'))*500+1000 : 1000
-    maxEnergy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water'))*500+1000 : 1000
+    energy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water')) * 500 + 1000 : 1000
+    maxEnergy.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water')) * 500 + 1000 : 1000
     currentLevel.value = Number(localStorage.getItem('currentLevel')) ? Number(localStorage.getItem('currentLevel')) : 1
+    let nextLevel = levels.value[currentLevel.value - 1]
+    percent.value = (count.value / nextLevel.count * 100)
 
 })
 onBeforeUnmount(() => {
     localStorage.setItem('count', count.value.toString())
     localStorage.setItem('currentLevel', currentLevel.value.toString())
-    
+
 })
 </script>
 <template>
@@ -101,7 +111,7 @@ onBeforeUnmount(() => {
     </div>
     <div @click="tap()" class="click mt-4 flex align-center justify-center">
         <UButton :disabled="isWater" :ui="{ rounded: 'rounded-full' }"
-            class="img flex align-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400 active:from-emerald-400 active:to-emerald-300 "
+            class="img flex align-center justify-center bg-gradient-to-r from-emerald-300 to-emerald-400"
             variant="soft">
             <img class="rounded-full" src="../assets/images/farmer.png">
         </UButton>
@@ -114,17 +124,27 @@ onBeforeUnmount(() => {
             </svg> {{ energy }} / {{ maxEnergy }}
         </div>
         <div class="mr-4">
-            <UButton @click="router.push({ path: '/update', query: { count: count } })" class="text-lg bg-gradient-to-r from-pink-500 to-yellow-500 ">
+            <UButton @click="router.push({ path: '/update', query: { count: count } })"
+                class="text-lg bg-gradient-to-r from-pink-500 to-yellow-500 ">
                 <p class="text-white">update</p>
             </UButton>
         </div>
     </div>
+    <UModal v-model="visible" fullscreen>
+        <div class="p-4">
+            <BoxAnimation @closeModal="closeModal"/>
+        </div>
+    </UModal>
+   
+
+
 
 </template>
 <style>
 .click:active {
-  transform: scale(1.01);
+    transform: scale(1.01);
 }
+
 .img {
     max-height: 18rem;
     max-width: 18rem;
@@ -136,6 +156,7 @@ onBeforeUnmount(() => {
         max-width: 15rem;
     }
 }
+
 @media (min-height: 800px) {
     .img {
         max-height: 22rem;

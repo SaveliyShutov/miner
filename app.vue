@@ -1,16 +1,24 @@
-<script setup>
-useHead({
-  title: 'Plant Miner',
-  // meta: [
-  //   { name: 'description', content: 'PlPo:place of posters - место для ваших афиш. Спектакль, концерт, встреча, лекция, распродажа, экскурсия, кино - любое событие может стать плакатом на PlPo"' },
-  //   { name: 'keywords', content: 'Спектакль, концерт, встреча, лекция, распродажа, экскурсия, кино, отдых, развлечение, плакат, афиша, мероприятия' },
-  //   { name: 'og:title', content: 'PlPo:place of posters' },
-  //   { name: 'og:description', content: 'PlPo:place of posters - место для ваших афиш. Спектакль, концерт, встреча, лекция, распродажа, экскурсия, кино - любое событие может стать плакатом на PlPo' },
-  //   { name: 'og:image', content: 'https://plpo.ru/android-chrome-512x512.png' },
-  //   { name: 'og:url', content: 'https://plpo.ru/' },
-  // ],  
-})
+<script setup lang="ts">
 
+declare global {
+    interface Window { Telegram: any; }
+}
+
+onMounted(async () => {
+  let data = await $fetch('http://localhost:3030/auth/login', {
+    method: 'POST',
+    body: {
+      id: '885129018',
+      userName: 'SaveliyShutov'
+    }
+  })
+  console.log(data);
+
+
+  useHead({
+    title: 'Plant Miner',
+  })
+})
 </script>
 <template>
   <div>

@@ -5,45 +5,50 @@ let clickLevel = ref<number>(1)
 let waterLevel = ref<number>(1)
 let farmerLevel = ref<number>(0)
 
-let waterAmmount = ref<number>(1000)
+let waterAmmount = ref<number>(1000+(waterLevel.value-1)*500)
 
 let count = ref<number>(Number(route.query.count))
 
 function upgrateClick() {
-    if(count.value >= 100){
-        clickLevel.value+=1
+    if (count.value >= 100) {
+        clickLevel.value += 1
         count.value -= 100
         localStorage.setItem('click', clickLevel.value.toString())
         localStorage.setItem('count', count.value.toString())
     }
-    
+
 }
 function upgrateWater() {
-    if(count.value >= 100){
-        waterLevel.value+=1
-        waterAmmount.value+=500
+    if (count.value >= 100) {
+        waterLevel.value += 1
+        waterAmmount.value += 500
         count.value -= 100
         localStorage.setItem('water', waterLevel.value.toString())
         localStorage.setItem('count', count.value.toString())
     }
-    
+
 }
 
+onMounted(() => {
+    clickLevel.value = Number(localStorage.getItem('click')) ? Number(localStorage.getItem('click')) : 1
+    waterLevel.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water')) : 1
+})
 </script>
 
 <template>
     <div class="grid grid-cols-2 gap-2 mt-2">
         <div class="text-base">
             <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">
-                Click {{clickLevel}} lvl
+                Click {{ clickLevel }} lvl
                 <br>
-                <p class="font-bold text-lg">{{clickLevel}}</p>
+                <p class="font-bold text-lg">{{ clickLevel }}</p>
             </UCard>
         </div>
         <div class="text-base">
-            <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Water {{ waterLevel }} lvl
+            <UCard class="bg-gray-800 text-center text-xs" :ui="{ body: { padding: 'px-2 py-1 sm:p-3' } }">Water {{
+                waterLevel }} lvl
                 <br>
-                <p class="font-bold text-lg">{{waterAmmount }}</p>
+                <p class="font-bold text-lg">{{ waterAmmount }}</p>
             </UCard>
         </div>
     </div>
@@ -135,7 +140,7 @@ function upgrateWater() {
                                     <path fill="currentColor"
                                         d="M8.04 16.34c1.01-2.51 2.15-5.38 6.46-6.34c0 0-5 0-6.62 4.63c0 0-.88-.88-.88-1.88s1-3.12 3.5-3.62c.71-.13 1.5-.26 2.28-.37c1.97-.26 3.86-.54 4.22-1.26c0 0-1.5 8.5-7 8.5c-.18 0-.43-.06-.67-.15L8.86 17l-.95-.33zM12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2" />
                                 </svg>
-                                1.000.000
+                                10M
                             </div>
                         </div>
                     </li>
