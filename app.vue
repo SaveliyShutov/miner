@@ -13,7 +13,7 @@ declare global {
 }
 
 onMounted(async () => {
-  alert(window.Telegram.WebApp.id)
+  alert(window.Telegram.WebApp.WebAppUser)
   let data = await $fetch('http://localhost:3030/auth/login', {
     method: 'POST',
     body: {
