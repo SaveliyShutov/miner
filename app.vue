@@ -1,5 +1,8 @@
 <script setup lang="ts">
 
+let id = ref(window.Telegram.WebApp.id)
+let username = ref(window.Telegram.WebApp.username)
+
 declare global {
     interface Window { Telegram: any; }
 }
@@ -8,8 +11,8 @@ onMounted(async () => {
   let data = await $fetch('http://localhost:3030/auth/login', {
     method: 'POST',
     body: {
-      id: '885129018',
-      userName: 'SaveliyShutov'
+      id: id,
+      userName: username
     }
   })
   console.log(data);
