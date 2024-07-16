@@ -5,12 +5,9 @@ useHead({
 
 const userStore = useAuth()
 
-// let tgId = ref(Number(window.Telegram.WebAppUser.id))
-// let username = ref(window.Telegram.WebAppUser.username)
-// let is_bot = ref(window.Telegram.WebAppUser.is_bot)
-
-// alert(window.Telegram.WebAppUser)
-// alert(window.Telegram.WebApp)
+let tgId = ref(Number(window.Telegram.WebApp.id))
+let username = ref(window.Telegram.WebApp.username)
+let is_bot = ref(window.Telegram.WebApp.is_bot)
 
 declare global {
   interface Window { Telegram: any; }
@@ -20,14 +17,7 @@ declare global {
 // let username = 'SaveliyShutov'
 // let is_bot = false
 
-// await userStore.login(tgId.value, username.value, is_bot.value)
-
-onBeforeMount(async () => {
-  await $fetch('http://localhost:3030/auth/test', {
-    method: 'POST',
-    body: window.Telegram.WebApp
-  })
-})
+await userStore.login(tgId.value, username.value, is_bot.value)
 </script>
 <template>
   <div>
