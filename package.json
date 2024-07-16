@@ -14,11 +14,13 @@
     "@nuxt/scripts": "^0.5.1",
     "@nuxt/ui": "^2.17.0",
     "@nuxtjs/color-mode": "^3.4.1",
+    "@pinia/nuxt": "^0.5.1",
     "@types/node-telegram-bot-api": "^0.64.6",
     "nuxt": "^3.12.1"
   },
   "dependencies": {
     "bottom-navigation-vue": "^3.3.5",
+    "pinia": "^2.1.7",
     "vue3-touch-events": "^4.1.8"
   }
 }

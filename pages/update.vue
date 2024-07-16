@@ -1,38 +1,39 @@
 <script setup lang="ts">
+const userStore = useAuth()
 let route = useRoute()
 
 let clickLevel = ref<number>(1)
 let waterLevel = ref<number>(1)
 let farmerLevel = ref<number>(0)
-
-let waterAmmount = ref<number>(1000+(waterLevel.value-1)*500)
-
+let waterAmmount = ref<number>(1000 + (waterLevel.value - 1) * 500)
 let count = ref<number>(Number(route.query.count))
 
-function upgrateClick() {
+async function upgrateClick() {
     if (count.value >= 100) {
         clickLevel.value += 1
+        await userStore.click(clickLevel.value, userStore.user._id)
         count.value -= 100
-        localStorage.setItem('click', clickLevel.value.toString())
-        localStorage.setItem('count', count.value.toString())
+        await userStore.count(count.value, userStore.user._id)
     }
 
 }
-function upgrateWater() {
+async function upgrateWater() {
     if (count.value >= 100) {
         waterLevel.value += 1
+        await userStore.waterLevel(waterLevel.value, userStore.user._id)
         waterAmmount.value += 500
         count.value -= 100
-        localStorage.setItem('water', waterLevel.value.toString())
-        localStorage.setItem('count', count.value.toString())
+        await userStore.count(count.value, userStore.user._id)
     }
 
 }
 
 onMounted(() => {
-    clickLevel.value = Number(localStorage.getItem('click')) ? Number(localStorage.getItem('click')) : 1
-    waterLevel.value = Number(localStorage.getItem('water')) ? Number(localStorage.getItem('water')) : 1
+    count.value = userStore.user.count
+    clickLevel.value = userStore.user.click
+    waterLevel.value = userStore.user.waterLevel
 })
+
 </script>
 
 <template>
@@ -57,7 +58,7 @@ onMounted(() => {
             <path fill="currentColor"
                 d="M8.04 16.34c1.01-2.51 2.15-5.38 6.46-6.34c0 0-5 0-6.62 4.63c0 0-.88-.88-.88-1.88s1-3.12 3.5-3.62c.71-.13 1.5-.26 2.28-.37c1.97-.26 3.86-.54 4.22-1.26c0 0-1.5 8.5-7 8.5c-.18 0-.43-.06-.67-.15L8.86 17l-.95-.33zM12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2" />
         </svg>
-        <p class="text-7xl  font-medium">{{ count }} </p>
+        <p class="text-5xl font-medium">{{ count }} </p>
     </div>
     <div class="flex justify-center mt-4">
         <div

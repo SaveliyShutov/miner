@@ -6,7 +6,10 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
-  modules: ["@nuxt/ui",'@nuxtjs/color-mode'],
+  modules: ["@nuxt/ui", '@nuxtjs/color-mode', '@pinia/nuxt'],
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
   colorMode: {
     preference: 'dark'
   }
