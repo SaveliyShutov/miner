@@ -5,10 +5,11 @@ useHead({
 
 const userStore = useAuth()
 
-let tgId = ref(Number(window.Telegram.WebApp.WebAppUser.id))
-let username = ref(window.Telegram.WebApp.WebAppUser.username)
-let is_bot = ref(window.Telegram.WebApp.WebAppUser.is_bot)
+let tgId = ref(Number(window.Telegram.WebApp.WebAppUser))
+let username = ref(window.Telegram.WebApp.WebAppUser)
+let is_bot = ref(window.Telegram.WebApp.WebAppUser)
 
+alert(window.Telegram.WebApp.WebAppUser)
 declare global {
   interface Window { Telegram: any; }
 }
