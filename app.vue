@@ -16,8 +16,10 @@ declare global {
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
+onBeforeMount(async () => {
+  await userStore.login(tgId.value, username.value, is_bot.value)
+})
 
-await userStore.login(tgId.value, username.value, is_bot.value)
 </script>
 <template>
   <div>
