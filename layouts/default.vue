@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 useHead({
     title: 'Plant Miner',
     script: [{ src: 'https://telegram.org/js/telegram-web-app.js' }]
@@ -19,11 +20,7 @@ let is_bot = ref(tg.is_bot)
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
-
-onBeforeMount(async () => {
-    tg.expand()
-    await userStore.login(tgId.value, username.value, is_bot.value)
-})
+await userStore.login(tgId.value, username.value, is_bot.value)
 
 </script>
 <template>
