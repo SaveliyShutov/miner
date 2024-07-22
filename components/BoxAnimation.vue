@@ -19,10 +19,7 @@ function onClick() {
     count.value += 1
     if (count.value <= randMax.value) {
         parent.removeChild(child)
-        console.log(count.value);
-        console.log(randMax.value);
         
-
         setTimeout(function () {
             parent.prepend(child)
         }, 250)
