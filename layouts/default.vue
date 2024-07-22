@@ -19,8 +19,16 @@ let is_bot = ref(tg.is_bot)
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
-await userStore.login(tgId.value, username.value, is_bot.value)
 
+let setApp = async () => {
+    await userStore.login(tgId.value, username.value, is_bot.value)
+    if (!userStore.isAuth)
+        await userStore.login(tgId.value, username.value, is_bot.value)
+}
+
+onMounted(async () => {
+    await setApp()
+})
 </script>
 <template>
     <div>

@@ -40,11 +40,11 @@ onBeforeUnmount(async () => {
             </UButton>
         </div>
     </div>
-    <UModal v-model="visible" fullscreen>
+    <!-- <UModal v-model="visible" fullscreen>
         <div class="p-4">
             <BoxAnimation @closeModal="closeModal" />
         </div>
-    </UModal>
+    </UModal> -->
 </template>
 <style>
 </style>
