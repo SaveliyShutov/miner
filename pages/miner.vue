@@ -13,11 +13,12 @@ function closeModal() {
 
 
 onMounted(() => {
-})
-
-onBeforeUnmount(async () => {
 
 })
+
+// onBeforeUnmount(async () => {
+
+// })
 
 </script>
 <template>
