@@ -8,7 +8,7 @@ export const useAuth = defineStore('auth', {
     actions: {
         async login(tgId: number, username: string, is_bot: boolean) {
             try {
-                let response: user = await $fetch('http://89.169.129.49:3030/auth/login', {
+                let response: user = await $fetch('https://plantcoin.ru/auth/login', {
                     method: 'POST',
                     body: {
                         tgId: tgId,
@@ -26,7 +26,7 @@ export const useAuth = defineStore('auth', {
         },
         async count(count: number, _id: string) {
             try {
-                let response: user = await $fetch('http://89.169.129.49:3030/auth/count', {
+                let response: user = await $fetch('https://plantcoin.ru/auth/count', {
                     method: 'POST',
                     body: {
                         _id: _id,
