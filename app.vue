@@ -9,28 +9,21 @@ declare global {
 }
 
 const userStore = useAuth()
-const tg = window.Telegram.WebApp
-
-let tgId = ref(Number(tg.id))
-let username = ref(tg.username)
-let is_bot = ref(tg.is_bot)
-
-await userStore.test(tg.initDataUnsafe.user)
-await userStore.test(window.Telegram)
-await userStore.login(tgId.value, username.value, is_bot.value)
-
+const tg = window.Telegram.WebApp.initDataUnsafe.user
 
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
 
-// let setApp = async () => {
-//   await userStore.login(tgId.value, username.value, is_bot.value)
-// }
+let setApp = async () => {
+  if (tg) {
+    await userStore.login(Number(tg.id), tg.username, tg.is_bot)
+  }
+}
 
-// onMounted(async () => {
-//   await setApp()
-// })
+onMounted(async () => {
+  await setApp()
+})
 </script>
 <template>
   <div>
