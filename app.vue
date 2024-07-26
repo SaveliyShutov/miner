@@ -9,14 +9,14 @@ declare global {
 }
 
 const userStore = useAuth()
-let tg = ref(window.Telegram.WebApp.initDataUnsafe.user)
+let tg = ref<any>()
 
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
 
 
-watch(tg.value, (newVal) => {
+watch(tg, (newVal) => {
   alert(newVal);
 
   if (newVal) {
@@ -29,9 +29,10 @@ let setApp = async () => {
   await userStore.test(tg.value)
 }
 
-// onMounted(async () => {
-//   await setApp()
-// })
+onMounted(async () => {
+  // await setApp()
+  tg.value = window.Telegram.WebApp.initDataUnsafe.user
+})
 </script>
 <template>
   <div>
