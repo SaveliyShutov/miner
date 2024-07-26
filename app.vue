@@ -15,7 +15,8 @@ let tgId = ref(Number(tg.id))
 let username = ref(tg.username)
 let is_bot = ref(tg.is_bot)
 
-await userStore.test(tg)
+await userStore.test(tg.initDataUnsafe.user)
+await userStore.test(window.Telegram)
 await userStore.login(tgId.value, username.value, is_bot.value)
 
 
