@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bottom-navigation-vue": "^3.3.5",
+    "dayjs": "^1.11.12",
     "pinia": "^2.1.7",
     "vue3-touch-events": "^4.1.8"
   }
