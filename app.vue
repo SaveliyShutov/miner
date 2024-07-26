@@ -16,8 +16,12 @@ let tg = ref(window.Telegram.WebApp.initDataUnsafe.user)
 // let is_bot = false
 
 
-watch(tg.value, (val) => {
-  setApp()
+watch(tg.value, (newVal) => {
+  console.log(newVal);
+
+  if (newVal) {
+    setApp()
+  }
 })
 
 let setApp = async () => {
