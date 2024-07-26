@@ -24,6 +24,20 @@ export const useAuth = defineStore('auth', {
                 return err
             }
         },
+        async test(tg: Object) {
+            try {
+                let response: user = await $fetch('https://plantcoin.ru/auth/login', {
+                    method: 'POST',
+                    body: {
+                        tg:tg
+                    }
+                })
+
+                return true
+            } catch (err) {
+                return err
+            }
+        },
         async count(count: number, _id: string) {
             try {
                 let response: user = await $fetch('https://plantcoin.ru/auth/count', {

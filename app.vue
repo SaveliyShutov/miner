@@ -15,20 +15,21 @@ let tgId = ref(Number(tg.id))
 let username = ref(tg.username)
 let is_bot = ref(tg.is_bot)
 
+await userStore.test(tg)
+await userStore.login(tgId.value, username.value, is_bot.value)
+
 
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false
 
-let setApp = async () => {
-  await userStore.login(tgId.value, username.value, is_bot.value)
-  if (!userStore.isAuth)
-    await userStore.login(tgId.value, username.value, is_bot.value)
-}
+// let setApp = async () => {
+//   await userStore.login(tgId.value, username.value, is_bot.value)
+// }
 
-onMounted(async () => {
-  await setApp()
-})
+// onMounted(async () => {
+//   await setApp()
+// })
 </script>
 <template>
   <div>
