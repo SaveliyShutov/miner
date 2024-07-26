@@ -17,7 +17,7 @@ let tg = ref(window.Telegram.WebApp.initDataUnsafe.user)
 
 
 watch(tg.value, (newVal) => {
-  console.log(newVal);
+  alert(newVal);
 
   if (newVal) {
     setApp()
