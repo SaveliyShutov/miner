@@ -11,14 +11,8 @@ declare global {
 const userStore = useAuth()
 let tg = ref<any>()
 
-// let tgId = 885129018
-// let username = 'SaveliyShutov'
-// let is_bot = false
-
 
 watch(tg, (newVal) => {
-  alert(newVal);
-
   if (newVal) {
     setApp()
   }
@@ -26,7 +20,6 @@ watch(tg, (newVal) => {
 
 let setApp = async () => {
   await userStore.login(Number(tg.value.id), tg.value.username, tg.value.is_bot)
-  await userStore.test(tg.value)
 }
 
 onMounted(async () => {
