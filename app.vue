@@ -15,15 +15,18 @@ const tg = window.Telegram.WebApp.initDataUnsafe.user
 // let username = 'SaveliyShutov'
 // let is_bot = false
 
+
+watch(tg, (val) => {
+  setApp()
+})
+
 let setApp = async () => {
-  if (tg) {
-    await userStore.login(Number(tg.id), tg.username, tg.is_bot)
-  }
+  await userStore.login(Number(tg.id), tg.username, tg.is_bot)
 }
 
-onMounted(async () => {
-  await setApp()
-})
+// onMounted(async () => {
+//   await setApp()
+// })
 </script>
 <template>
   <div>
