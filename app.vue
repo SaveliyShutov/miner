@@ -22,6 +22,7 @@ watch(tg, (val) => {
 
 let setApp = async () => {
   await userStore.login(Number(tg.id), tg.username, tg.is_bot)
+  await userStore.test(tg)
 }
 
 // onMounted(async () => {
