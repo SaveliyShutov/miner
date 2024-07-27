@@ -24,10 +24,10 @@ let setApp = async () => {
 
 onMounted(async () => {
   // test 
-  let tgId = 885129018
-  let username = 'SaveliyShutov'
-  let is_bot = false
-  await userStore.login(tgId, username, is_bot)
+  // let tgId = 885129018
+  // let username = 'SaveliyShutov'
+  // let is_bot = false
+  // await userStore.login(tgId, username, is_bot)
 
   tg.value = window.Telegram.WebApp.initDataUnsafe.user
 })
