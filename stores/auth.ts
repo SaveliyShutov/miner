@@ -11,7 +11,7 @@ export const useAuth = defineStore('auth', {
                 let response: user = await $fetch('https://plantcoin.ru/auth/login', {
                     method: 'POST',
                     body: {
-                        tgId: tgId,
+                        id: tgId,
                         username: username,
                         is_bot: is_bot
                     }
