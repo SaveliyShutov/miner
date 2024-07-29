@@ -12,7 +12,6 @@ const userStore = useAuth()
 let tg = ref<any>()
 tg.value = window.Telegram.WebApp.initDataUnsafe.user
 
-let tg_id = ref<any>(null)
 
 watch(tg, (val) => {
   if (val) {
@@ -20,26 +19,12 @@ watch(tg, (val) => {
   }
 })
 
-watch(tg_id, (val) => {
-  if (val) {
-    setApp()
-  }
-})
 
 let setApp = async () => {
-  if (tg_id.value) {
-    await userStore.login(Number(tg_id.value))
-  }
-  else {
-    alert(tg)
     await userStore.login(Number(tg.value.id))
     localStorage.setItem('tgId', tg.value.id);
   }
-}
 
-onMounted(() => {
-  tg_id.value = localStorage.getItem('tgId') ? localStorage.getItem('tgId') : null
-})
 
 </script>
 <template>
