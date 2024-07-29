@@ -24,15 +24,13 @@ export const useAuth = defineStore('auth', {
                 return err
             }
         },
-        async test(tg: Object) {
+        async openBox(_id: string) {
             try {
-                let response: user = await $fetch('https://plantcoin.ru/auth/login', {
+                let response: user = await $fetch('https://plantcoin.ru/auth/open-box', {
                     method: 'POST',
-                    body: {
-                        tg:tg
-                    }
+                    body: {_id:_id}
                 })
-
+                this.user = response
                 return true
             } catch (err) {
                 return err
@@ -60,10 +58,10 @@ export const useAuth = defineStore('auth', {
 interface user {
     tgId: number;
     userName: string;
-    waterLevel: number;
-    click: number;
     count: number;
-    currentWater: number;
-    level: number;
     _id: string;
+    isWaiting: boolean,
+    timerLimit: number,
+    remainingTime: number,
+    lastSignTime: number
 }

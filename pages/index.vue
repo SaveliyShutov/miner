@@ -1,24 +1,25 @@
 <script setup lang="ts">
 
 const userStore = useAuth()
+const { user, isAuth } = storeToRefs(userStore)
 let router = useRouter()
 
 let count = ref<number>(0)
 let time = ref('08:00:00')
-let timerLimit = ref<number>(86400)
+let timerLimit = ref<number>(user.value.timerLimit)
 let previousTime = ref<number>(86400)
 
 let visible = ref<boolean>(false)
-let isWaiting = ref<boolean>(false)
+let isWaiting = ref<boolean>(user.value.isWaiting)
 
 function closeModal() {
     visible.value = !visible.value
 }
 
-function openBox() {
-    visible.value = !visible.value
+async function openBox() {
+    await userStore.openBox(userStore.user._id)
+    // visible.value = !visible.value
     isWaiting.value = true
-    let boxTimerId = setInterval(() => timer(), 1000);
 }
 
 // timer logics 
@@ -39,6 +40,13 @@ function secondsToHms(d: number) {
 
     return hDisplay + mDisplay + sDisplay;
 }
+
+onMounted(() => {
+
+})
+
+onBeforeMount(() => {
+})
 
 
 </script>
