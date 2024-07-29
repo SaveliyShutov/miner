@@ -20,12 +20,6 @@ watch(tg, (val) => {
   }
 })
 
-watch(tg_id, (newVal) => {
-  if (newVal) {
-    setApp()
-  }
-})
-
 let setApp = async () => {
   if (tg_id.value) {
     await userStore.login(Number(tg_id.value))
