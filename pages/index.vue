@@ -17,6 +17,7 @@ function closeModal() {
 }
 
 async function openBox() {
+    console.log(user.value);
     await userStore.openBox(userStore.user._id)
     // visible.value = !visible.value
     isWaiting.value = true
@@ -52,6 +53,7 @@ onBeforeMount(() => {
 </script>
 <template>
     <div class="flex flex-col">
+        <p class="font-medium">tg {{ user.tgId }} </p>
         <div class="flex flex-col">
             <div class="text-white h-full mt-3 grid grid-cols-6 gap-5">
                 <div class="flex align-center items-center justify-center col-span-6">
