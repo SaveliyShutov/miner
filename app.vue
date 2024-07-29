@@ -20,6 +20,12 @@ watch(tg, (val) => {
   }
 })
 
+watch(tg_id, (val) => {
+  if (val) {
+    setApp()
+  }
+})
+
 let setApp = async () => {
   if (tg_id.value) {
     await userStore.login(Number(tg_id.value))
@@ -33,7 +39,6 @@ let setApp = async () => {
 onMounted(() => {
   tg_id.value = localStorage.getItem('tgId') ? localStorage.getItem('tgId') : null
 })
-// test
 
 </script>
 <template>
