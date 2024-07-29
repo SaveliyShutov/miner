@@ -31,6 +31,7 @@ let setApp = async () => {
     await userStore.login(Number(tg_id.value))
   }
   else {
+    alert(tg)
     await userStore.login(Number(tg.value.id))
     localStorage.setItem('tgId', tg.value.id);
   }
