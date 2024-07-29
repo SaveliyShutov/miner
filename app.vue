@@ -10,6 +10,10 @@ declare global {
 
 const userStore = useAuth()
 let tg = ref<any>()
+tg.value = window.Telegram.WebApp.initDataUnsafe.user
+
+let tg_id = ref()
+tg_id.value = localStorage.getItem('tgId')
 
 watch(tg, (newVal) => {
   if (newVal) {
@@ -17,13 +21,22 @@ watch(tg, (newVal) => {
   }
 })
 
+watch(tg_id, (newVal) => {
+  if (newVal) {
+    setApp()
+  }
+})
+
 let setApp = async () => {
-  await userStore.login(Number(tg.value.id), tg.value.username, tg.value.is_bot)
+  if (tg_id.value) {
+    await userStore.login(Number(tg_id), '', false)
+  }
+  else {
+    await userStore.login(Number(tg.value.id), tg.value.username, tg.value.is_bot)
+    localStorage.setItem('tgId', tg.value.id);
+  }
 }
 
-onMounted(() => {
-  tg.value = window.Telegram.WebApp.initDataUnsafe.user
-})
 //test
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
