@@ -11,6 +11,8 @@ declare global {
 const userStore = useAuth()
 let tg = ref<any>()
 
+tg.value = window.Telegram.WebApp.initDataUnsafe.user
+
 
 watch(tg, (newVal) => {
   if (newVal) {
@@ -22,14 +24,11 @@ let setApp = async () => {
   await userStore.login(Number(tg.value.id), tg.value.username, tg.value.is_bot)
 }
 
-// prod
-tg.value = window.Telegram.WebApp.initDataUnsafe.user
-
 // test
-let tgId = 885129018
-let username = 'SaveliyShutov'
-let is_bot = false
-await userStore.login(tgId, username, is_bot)
+// let tgId = 885129018
+// let username = 'SaveliyShutov'
+// let is_bot = false
+// await userStore.login(tgId, username, is_bot)
 
 </script>
 <template>
