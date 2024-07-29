@@ -13,7 +13,6 @@ let tg = ref<any>()
 tg.value = window.Telegram.WebApp.initDataUnsafe.user
 
 let tg_id = ref()
-tg_id.value = localStorage.getItem('tgId')
 
 watch(tg, (newVal) => {
   if (newVal) {
@@ -29,15 +28,18 @@ watch(tg_id, (newVal) => {
 
 let setApp = async () => {
   if (tg_id.value) {
-    await userStore.login(Number(tg_id), '', false)
+    await userStore.login(Number(tg_id.value))
   }
   else {
-    await userStore.login(Number(tg.value.id), tg.value.username, tg.value.is_bot)
+    await userStore.login(Number(tg.value.id))
     localStorage.setItem('tgId', tg.value.id);
   }
 }
 
-//test
+onMounted(() => {
+  tg_id.value = localStorage.getItem('tgId')
+})
+// test
 // let tgId = 885129018
 // let username = 'SaveliyShutov'
 // let is_bot = false

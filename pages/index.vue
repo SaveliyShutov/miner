@@ -10,17 +10,14 @@ let timerLimit = ref<number>(user.value.timerLimit)
 let previousTime = ref<number>(86400)
 
 let visible = ref<boolean>(false)
-let isWaiting = ref<boolean>(user.value.isWaiting)
 
 function closeModal() {
     visible.value = !visible.value
 }
 
 async function openBox() {
-    console.log(user.value);
     await userStore.openBox(userStore.user._id)
     // visible.value = !visible.value
-    isWaiting.value = true
 }
 
 // timer logics 
@@ -43,7 +40,6 @@ function secondsToHms(d: number) {
 }
 
 onMounted(() => {
-
 })
 
 onBeforeMount(() => {
@@ -53,8 +49,8 @@ onBeforeMount(() => {
 </script>
 <template>
     <div class="flex flex-col">
-        <p class="font-medium">tg {{ user.tgId }} </p>
         <div class="flex flex-col">
+            <p>tg {{ user.tgId }}</p>
             <div class="text-white h-full mt-3 grid grid-cols-6 gap-5">
                 <div class="flex align-center items-center justify-center col-span-6">
                     <svg class="size-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -66,7 +62,7 @@ onBeforeMount(() => {
             </div>
         </div>
         <div>
-            <UButton v-if='!isWaiting' size="xl" block @click="openBox()"
+            <UButton v-if='!user.isWaiting' size="xl" block @click="openBox()"
                 class="bg-gradient-to-r from-pink-500 to-yellow-500 ">
                 <p class="text-white text-xl font-bold">Claim</p>
             </UButton>

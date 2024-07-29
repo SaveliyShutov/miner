@@ -6,14 +6,12 @@ export const useAuth = defineStore('auth', {
     getters: {
     },
     actions: {
-        async login(tgId: number, username: string, is_bot: boolean) {
+        async login(tgId: number) {
             try {
                 let response: user = await $fetch('https://plantcoin.ru/auth/login', {
                     method: 'POST',
                     body: {
                         id: tgId,
-                        username: username,
-                        is_bot: is_bot
                     }
                 })
 
@@ -28,7 +26,7 @@ export const useAuth = defineStore('auth', {
             try {
                 let response: user = await $fetch('https://plantcoin.ru/auth/open-box', {
                     method: 'POST',
-                    body: {_id:_id}
+                    body: { _id: _id }
                 })
                 this.user = response
                 return true
