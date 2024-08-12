@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  css: ["/assets/style/main.scss"],
   ssr: false,
   app: {
     head: {
@@ -11,6 +12,16 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**'],
   },
   colorMode: {
-    preference: 'dark'
-  }
+    preference: 'dark',
+    fallback: 'dark',
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storageKey: 'nuxt-color-mode'
+  },
+  plugins: [
+    '~/plugins/gsap.ts',
+  ]
 })

@@ -8,7 +8,7 @@ export const useAuth = defineStore('auth', {
     actions: {
         async login(tgId: number) {
             try {
-                let response: user = await $fetch('https://plantcoin.ru/auth/login', {
+                let response: user = await $fetch('http://localhost:3030/auth/login', {
                     method: 'POST',
                     body: {
                         id: tgId,
@@ -24,7 +24,7 @@ export const useAuth = defineStore('auth', {
         },
         async openBox(_id: string) {
             try {
-                let response: user = await $fetch('https://plantcoin.ru/auth/open-box', {
+                let response: user = await $fetch('http://localhost:3030/auth/open-box', {
                     method: 'POST',
                     body: { _id: _id }
                 })
@@ -36,7 +36,7 @@ export const useAuth = defineStore('auth', {
         },
         async count(count: number, _id: string) {
             try {
-                let response: user = await $fetch('https://plantcoin.ru/auth/count', {
+                let response: user = await $fetch('http://localhost:3030/auth/count', {
                     method: 'POST',
                     body: {
                         _id: _id,

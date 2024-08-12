@@ -19,12 +19,10 @@ watch(tg, (val) => {
   }
 })
 
-
 let setApp = async () => {
-    await userStore.login(Number(tg.value.id))
-    localStorage.setItem('tgId', tg.value.id);
-  }
-
+  await userStore.login(Number(tg.value.id))
+  localStorage.setItem('tgId', tg.value.id);
+}
 
 </script>
 <template>

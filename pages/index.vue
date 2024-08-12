@@ -1,80 +1,73 @@
 <script setup lang="ts">
-
-const userStore = useAuth()
-const { user, isAuth } = storeToRefs(userStore)
-let router = useRouter()
-
-let count = ref<number>(0)
-let time = ref('08:00:00')
-let timerLimit = ref<number>(user.value.timerLimit)
-let previousTime = ref<number>(86400)
-
-let visible = ref<boolean>(false)
-
-function closeModal() {
-    visible.value = !visible.value
-}
-
-async function openBox() {
-    await userStore.openBox(userStore.user._id)
-    // visible.value = !visible.value
-}
-
-// timer logics 
-function timer() {
-    previousTime.value -= 1
-    time.value = secondsToHms(previousTime.value)
-}
-
-function secondsToHms(d: number) {
-    d = Number(d);
-    let h = Math.floor(d / 3600);
-    let m = Math.floor(d % 3600 / 60);
-    let s = Math.floor(d % 3600 % 60);
-
-    let hDisplay = h <= 9 ? `0${h}:` : `${h}:`
-    let mDisplay = m <= 9 ? `0${m}:` : `${m}:`
-    var sDisplay = s <= 9 ? `0${s}` : `${s}`
-
-    return hDisplay + mDisplay + sDisplay;
-}
+import gsap from 'gsap';
 
 onMounted(() => {
+    const box = document.querySelector(".box")!;
+    box.addEventListener("click", () => {
+        gsap.to(box, {
+            scale: 0.9,
+            yoyo: true,
+            duration: 0.2,
+            repeat: 1
+        });
+    });
+
 })
-
-onBeforeMount(() => {
-})
-
-
 </script>
 <template>
-    <div class="flex flex-col">
-        <div class="flex flex-col">
-            <p>tg {{ user.tgId }}</p>
-            <div class="text-white h-full mt-3 grid grid-cols-6 gap-5">
-                <div class="flex align-center items-center justify-center col-span-6">
-                    <svg class="size-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M8.04 16.34c1.01-2.51 2.15-5.38 6.46-6.34c0 0-5 0-6.62 4.63c0 0-.88-.88-.88-1.88s1-3.12 3.5-3.62c.71-.13 1.5-.26 2.28-.37c1.97-.26 3.86-.54 4.22-1.26c0 0-1.5 8.5-7 8.5c-.18 0-.43-.06-.67-.15L8.86 17l-.95-.33zM12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2" />
-                    </svg>
-                    <p class="text-5xl font-medium">{{ count }} </p>
-                </div>
+    <div class="main relative">
+        <div class="flex flex-col items-center mt-20">
+            <div
+                class="col-span-1 relative inline-flex items-center justify-center w-28 h-28 overflow-hidden bg-green-800 rounded-full">
+                <span class="unbounded-bold text-7xl text-white">S</span>
+            </div>
+            <span class="col-span-1 mt-3 unbounded-medium text-md text-white">Saveliy Shutov</span>
+            <div class="flex items-center mt-10">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                    width="42" height="42" viewBox="0 0 256 256" xml:space="preserve">
+                    <defs>
+                    </defs>
+                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                        transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                        <circle cx="30.878" cy="72.818" r="17.178"
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,0,164); fill-rule: nonzero; opacity: 1;"
+                            transform="  matrix(1 0 0 1 0 0) " />
+                        <circle cx="59.128" cy="72.818" r="17.178"
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,0,164); fill-rule: nonzero; opacity: 1;"
+                            transform="  matrix(1 0 0 1 0 0) " />
+                        <rect x="32.86" y="12.83" rx="0" ry="0" width="24.28" height="66.06"
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,0,164); fill-rule: nonzero; opacity: 1;"
+                            transform=" matrix(1 0 0 1 0 0) " />
+                        <path
+                            d="M 56.534 24.798 H 33.466 c -3.402 0 -6.161 -2.758 -6.161 -6.161 v -0.943 C 27.306 7.922 35.228 0 45 0 h 0 c 9.772 0 17.694 7.922 17.694 17.694 v 0.943 C 62.694 22.04 59.936 24.798 56.534 24.798 z"
+                            style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,0,164); fill-rule: nonzero; opacity: 1;"
+                            transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                    </g>
+                </svg>
+                <p class="unbounded-bold text-5xl">1488</p>
             </div>
         </div>
-        <div>
-            <UButton v-if='!user.isWaiting' size="xl" block @click="openBox()"
-                class="bg-gradient-to-r from-pink-500 to-yellow-500 ">
-                <p class="text-white text-xl font-bold">Claim</p>
-            </UButton>
-            <UButton v-else disabled block size="xl" color="gray">
-                <p class="text-white text-xl font-bold">{{ time }}</p>
-            </UButton>
-        </div>
+        <button type="button" class="z-2 box absolute bottom-20 left-0 w-full text-black bg-white rounded-lg py-2.5">
+            <p class="unbounded-regular text-lg ">сдать сперму</p>
+        </button>
     </div>
-    <UModal v-model="visible" fullscreen>
-        <div class="p-4">
-            <BoxAnimation @closeModal="closeModal" />
-        </div>
-    </UModal>
+
+
+
 </template>
-<style></style>
+<style>
+.main {
+    height: 85svh;
+}
+
+.particle {
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 9999px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
