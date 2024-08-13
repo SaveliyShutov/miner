@@ -13,7 +13,7 @@
         />
       </svg>
 
-      <p class="text-2xl font-medium text-center">Приглашай друзей. Получай по жопе с ними</p>
+      <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай по жопе с ними</p>
     </div>
     <BottomButton> Савелий не какашка </BottomButton>
   </div>
