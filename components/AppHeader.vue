@@ -20,7 +20,7 @@ let router = useRouter()
                 </svg>
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Home</span>
             </button>
-            <button type="button" class="inline-flex flex-col items-center justify-center px-5 group">
+            <button @click="router.push('/friends')" type="button" class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                     class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 24 24">
