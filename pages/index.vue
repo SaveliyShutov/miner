@@ -23,7 +23,7 @@ onMounted(() => {
             </div>
             <span class="col-span-1 mt-3 unbounded-medium text-md text-white">Saveliy Shutov</span>
             <div class="flex items-center mt-10">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                     width="42" height="42" viewBox="0 0 256 256" xml:space="preserve">
                     <defs>
                     </defs>
@@ -43,12 +43,12 @@ onMounted(() => {
                             style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,0,164); fill-rule: nonzero; opacity: 1;"
                             transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
                     </g>
-                </svg>
+                </svg> -->
                 <p class="unbounded-bold text-5xl">1488</p>
             </div>
         </div>
         <button type="button" class="z-2 box absolute bottom-20 left-0 w-full text-black bg-white rounded-lg py-2.5">
-            <p class="unbounded-regular text-lg ">сдать сперму</p>
+            <p class="unbounded-regular text-lg ">савелий какашка</p>
         </button>
     </div>
 
