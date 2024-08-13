@@ -16,11 +16,11 @@
 
       <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай по жопе с ними</p>
 
-      <div class="w-full mt-10 flex justify-start">
-        <p class="text-lg font-medium text-center"><span class="banana">🍌</span>  Скопируй ссылку</p>
+      <div class="w-full mt-20 flex justify-start">
+        <p class="text-lg font-medium text-center flex align-center"><span class="banana mr-2">🍌</span>  Скопируй ссылку</p>
       </div>
-      <div class="w-full mt-4 flex justify-start">
-        <p class="text-lg font-medium text-center"><span class="banana">🥭</span>  Отправь другу и получи по жопе!</p>
+      <div class="w-full mt-5 flex justify-start">
+        <p class="text-lg font-medium text-center flex align-center"><span class="banana mr-2">🥭</span>  Отправь другу и получи по жопе!</p>
       </div>
     </div>
     <BottomButton> пригласить друга мазохиста </BottomButton>
