@@ -4,25 +4,25 @@ useHead({
   script: [{ src: 'https://telegram.org/js/telegram-web-app.js' }]
 })
 
-declare global {
-  interface Window { Telegram: any; }
-}
+// declare global {
+//   interface Window { Telegram: any; }
+// }
 
-const userStore = useAuth()
-let tg = ref<any>()
-tg.value = window.Telegram.WebApp.initDataUnsafe.user
+// const userStore = useAuth()
+// let tg = ref<any>()
+// tg.value = window.Telegram.WebApp.initDataUnsafe.user
 
 
-watch(tg, (val) => {
-  if (val) {
-    setApp()
-  }
-})
+// watch(tg, (val) => {
+//   if (val) {
+//     setApp()
+//   }
+// })
 
-let setApp = async () => {
-  await userStore.login(Number(tg.value.id))
-  localStorage.setItem('tgId', tg.value.id);
-}
+// let setApp = async () => {
+//   await userStore.login(Number(tg.value.id))
+//   localStorage.setItem('tgId', tg.value.id);
+// }
 
 </script>
 <template>
@@ -30,5 +30,7 @@ let setApp = async () => {
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <UModals />
   </div>
 </template>
