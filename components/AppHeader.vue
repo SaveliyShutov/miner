@@ -6,7 +6,7 @@ let router = useRouter()
 
 <template>
     <div class="fixed bottom-0 left-0 z-50 w-full h-20 pb-5" style="background: #121212;">
-        <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
+        <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             <button @click="router.push('/')" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,8 @@ let router = useRouter()
                 </svg>
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Home</span>
             </button>
-            <button @click="router.push('/friends')" type="button" class="inline-flex flex-col items-center justify-center px-5 group">
+            <button @click="router.push('/friends')" type="button"
+                class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                     class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 24 24">
@@ -29,6 +30,14 @@ let router = useRouter()
                         d="M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 0 1 9.288 0M15 7a3 3 0 1 1-6 0a3 3 0 0 1 6 0m6 3a2 2 0 1 1-4 0a2 2 0 0 1 4 0M7 10a2 2 0 1 1-4 0a2 2 0 0 1 4 0" />
                 </svg>
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Friends</span>
+            </button>
+            <button @click="router.push('/tasks')" type="button" class="inline-flex flex-col items-center justify-center px-5 group">
+                <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor">
+                    <path fill=" currentColor"
+                        d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H8V4h12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z" />
+                </svg>
+                <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Tasks</span>
             </button>
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
