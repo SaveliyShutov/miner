@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+let modal = ref(false)
+
+function openModal() {
+  modal.value = true
+}
+</script>
 <template>
   <div class="flex items-center px-6">
     <div class="flex flex-col items-center">
@@ -26,11 +32,11 @@
           и получи токены!</p>
       </div>
     </div>
-    <BottomButton> пригласить друга </BottomButton>
+    <BottomButton @buttonClick="openModal"> пригласить друга </BottomButton>
+    <InviteFriendModal :isOpen="modal" @close="modal = false" />
   </div>
 </template>
 <style scoped lang="scss">
-
 .banana {
   font-size: 30px;
 }
