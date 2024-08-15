@@ -5,8 +5,8 @@ let router = useRouter()
 </script>
 
 <template>
-    <div class="fixed bottom-5 left-0 z-50 w-full h-16">
-        <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
+    <div class="fixed bottom-0 left-0 z-50 w-full h-20" style="background: #121212;">
+        <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium pb-5">
             <button @click="router.push('/')" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
