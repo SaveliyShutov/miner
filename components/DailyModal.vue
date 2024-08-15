@@ -15,7 +15,7 @@ const modal = useModal()
                     <div
                         class="h-32 border-4 border rounded-lg border-zinc-800 text-center flex flex-col justify-center items-center">
                         <p class="text-3xl font-bold text-start"> 10</p>
-                        <p class="text-base font-medium text-zinc-400 text-start"> пидор коины</p>
+                        <p class="text-base font-medium text-zinc-400 text-start"> коины</p>
                     </div>
                     <div
                         class="h-32 border-4 border rounded-lg border-zinc-800 text-center flex flex-col justify-center items-center">
@@ -27,7 +27,7 @@ const modal = useModal()
                     если не зайдешь то все напрасно!</p> -->
                 <button @click="modal.close()" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
                     <p class="unbounded-regular text-lg">
-                        Да иди ты нахуй
+                        Да иди ты в жопу
                     </p>
                 </button>
             </div>

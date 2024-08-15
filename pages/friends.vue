@@ -15,7 +15,7 @@
       <img class="mt-20 mb-10 size-32"
         src="https://em-content.zobj.net/source/telegram/386/see-no-evil-monkey_1f648.webp">
 
-      <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай по жопе с ними</p>
+      <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай токены с ними</p>
 
       <div class="w-full mt-20  flex justify-start">
         <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🍌</span>Скопируй
@@ -23,10 +23,10 @@
       </div>
       <div class="w-full mt-5 flex justify-start">
         <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🥭</span>Отправь другу
-          и получи по жопе!</p>
+          и получи токены!</p>
       </div>
     </div>
-    <BottomButton> пригласить друга мазохиста </BottomButton>
+    <BottomButton> пригласить друга </BottomButton>
   </div>
 </template>
 <style scoped lang="scss">
