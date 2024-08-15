@@ -6,7 +6,6 @@ let mainContent: any = ref(null)
 function setMargin(newHeight: number) {
     if (newHeight >= window.innerHeight - 90) {
         mainContent.value.style.marginBottom = '90px'
-        console.log(mainContent.value.style);
     }
 }
 watch(height, (newHeight) => {
