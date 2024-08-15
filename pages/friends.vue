@@ -7,7 +7,7 @@ function openModal() {
 </script>
 <template>
   <div class="flex items-center px-6">
-    <div class="flex flex-col items-center" >
+    <div class="flex flex-col items-center">
       <!-- <svg class="mt-20 mb-10" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 128 128">
         <path
           fill="#6F47D7"
