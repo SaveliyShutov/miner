@@ -16,7 +16,7 @@ let { isOpen } = toRefs(props)
                 <span class="mt-5 unbounded-bold text-2xl text-white text-center">Ваши друзья клоуны</span>
             </div>
         </div>
-        <div class="absolute bottom-20 left-0 w-full px-6 pb-4">
+        <div class="absolute bottom-0 left-0 w-full px-6 pb-4">
             <button @click="emit('close')" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
                 <p class="unbounded-regular text-lg">
                     Скопировать ссылку
