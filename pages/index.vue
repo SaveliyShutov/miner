@@ -42,7 +42,7 @@ onMounted(() => {
             <div class="flex items-center justify-center w-28 h-28 bg-green-800 rounded-full">
                 <span class="unbounded-bold text-7xl text-white">S</span>
             </div>
-            <span class="mt-3 unbounded-medium text-1xl text-white">Saveliy Shutov</span>
+            <span class="mt-3 unbounded-medium text-2xl text-white">Saveliy Shutov</span>
             <div class="flex items-center mt-10">
                 <p class="unbounded-bold text-3xl">1488</p>
             </div>
