@@ -6,7 +6,7 @@ const modal = useModal()
         <div class="flex items-center justify-center">
             <div class="flex flex-col items-center mt-20">
                 <img class="size-48" src="https://em-content.zobj.net/source/telegram/386/fire_1f525.webp">
-                <span class="mt-5 unbounded-bold text-2xl text-white text-center">Ваши ежедневные подарочки</span>
+                <span class="mt-5 unbounded-bold text-1xl text-white text-center">Ваши ежедневные подарочки</span>
             </div>
 
 

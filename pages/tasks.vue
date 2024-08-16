@@ -6,7 +6,7 @@ onMounted(() => {
     <div class="flex justify-start flex-col">
 
         <div class="mt-20 relative inline-flex items-center">
-            <p class="text-2xl unbounded-bold">Tasks</p>
+            <p class="text-1xl unbounded-bold">Tasks</p>
             <div class="relative -top-3 text-md unbounded-bold">
                 3</div>
         </div>
@@ -39,7 +39,7 @@ onMounted(() => {
 
 
         <div class="mt-10 relative inline-flex items-center">
-            <p class="text-2xl unbounded-bold">Socials</p>
+            <p class="text-1xl unbounded-bold">Socials</p>
             <div class="relative -top-3 text-md unbounded-bold">
                 4</div>
         </div>

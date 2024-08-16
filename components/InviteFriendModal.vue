@@ -13,7 +13,7 @@ let { isOpen } = toRefs(props)
             <div class="flex flex-col items-center mt-20">
                 <img class="size-48"
                     src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Smileys/Clown%20Face.webp">
-                <span class="mt-5 unbounded-bold text-2xl text-white text-center">Ваши друзья клоуны</span>
+                <span class="mt-5 unbounded-bold text-1xl text-white text-center">Ваши друзья клоуны</span>
             </div>
         </div>
         <div class="absolute bottom-0 left-0 w-full px-6 pb-4">

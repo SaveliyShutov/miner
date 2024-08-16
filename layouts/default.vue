@@ -4,8 +4,10 @@ let { height } = useWindowSize()
 // ref to element
 let mainContent: any = ref(null)
 function setMargin(newHeight: number) {
-    if (newHeight >= window.innerHeight - 90) {
-        mainContent.value.style.marginBottom = '90px'
+    if (mainContent.value.offsetHeight >= newHeight - 90) {
+        mainContent.value.style.paddingBottom = '90px'
+    } else {
+        mainContent.value.style.paddingBottom = '0px'
     }
 }
 watch(height, (newHeight) => {
