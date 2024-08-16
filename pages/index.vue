@@ -7,7 +7,7 @@ const modal = useModal()
 let pageContainer: any = ref(null)
 let { height } = useWindowSize()
 
-function setMargin(newWindowHeight: number) {    
+function setMargin(newWindowHeight: number) {
     if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
         // прибавляем высоту кнопки, чтобы можно было проскроллить
         pageContainer.value.style.paddingBottom = '48px'

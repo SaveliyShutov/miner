@@ -1,5 +1,38 @@
 <script setup lang="ts">
+import confetti from "canvas-confetti";
+import useConfetti from "canvas-confetti"
 const modal = useModal()
+
+onMounted(() => {
+    var defaults = {
+        spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+        colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+    };
+
+    function shoot() {
+        confetti({
+            ...defaults,
+            particleCount: 20,
+            scalar: 1.2,
+            shapes: ['star']
+        });
+
+        confetti({
+            ...defaults,
+            particleCount: 10,
+            scalar: 0.75,
+            shapes: ['circle']
+        });
+    }
+
+    setTimeout(shoot, 0);
+    setTimeout(shoot, 100);
+    setTimeout(shoot, 200);
+})
 </script>
 <template>
     <UModal :ui="{ background: 'bg-white dark:bg-neutral-900' }" fullscreen>
@@ -25,7 +58,8 @@ const modal = useModal()
                 </div>
                 <!-- <p class="text-base font-medium text-start flex align-center mb-5 text-zinc-400">Ну зайди ты завтра пж,
                     если не зайдешь то все напрасно!</p> -->
-                <button @click="modal.close()" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
+                <button @click="modal.close()" type="button"
+                    class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
                     <p class="unbounded-regular text-lg">
                         Да иди ты в жопу
                     </p>
