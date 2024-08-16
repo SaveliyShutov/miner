@@ -36,3 +36,10 @@
     font-weight: 300;
     font-style: normal;
 }
+// для большой кнопки внизу
+.bottom-button-container {
+    position: fixed;
+    bottom: 84px;
+    left: 0;
+    width: 100%;
+}

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
-  modules: ["@nuxt/ui", '@nuxtjs/color-mode', '@pinia/nuxt'],
+  modules: ["@nuxt/ui", '@nuxtjs/color-mode', '@pinia/nuxt', '@vueuse/nuxt'],
   pinia: {
     storesDirs: ['./stores/**'],
   },
