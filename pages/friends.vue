@@ -8,12 +8,12 @@ function openModal() {
 <template>
   <div class="flex items-center px-6">
     <div class="flex flex-col items-center">
-      <img class="mt-20 mb-10 size-32"
+      <img class="mt-10 mb-5 size-32"
         src="https://em-content.zobj.net/source/telegram/386/see-no-evil-monkey_1f648.webp">
 
-      <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай токены с ними</p>
+      <p class="text-1xl unbounded-bold text-center">Приглашай друзей. Получай токены с ними</p>
 
-      <div class="w-full mt-20  flex justify-start">
+      <div class="w-full mt-10  flex justify-start">
         <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🍌</span>Скопируй
           ссылку</p>
       </div>
