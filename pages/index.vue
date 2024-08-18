@@ -35,6 +35,12 @@ onMounted(() => {
         })
     })
 })
+let _window: any = window
+
+onMounted(() => {
+    console.log(window);
+    
+})
 </script>
 <template>
     <div ref="pageContainer">
@@ -47,6 +53,12 @@ onMounted(() => {
                 <p class="unbounded-bold text-3xl">1488</p>
             </div>
         </div>
+    </div>
+    <div>
+        Web App User:
+        {{ _window.Telegram.WebAppUser }}
+        <hr>
+        {{ _window.Telegram }}
     </div>
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
