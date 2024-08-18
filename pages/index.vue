@@ -56,7 +56,7 @@ onMounted(() => {
     </div>
     <div>
         Web App User:
-        {{ _window.Telegram.WebAppUser }}
+        {{ _window.Telegram.WebApp.initDataUnsafe }}
         <hr>
         {{ _window.Telegram }}
     </div>
