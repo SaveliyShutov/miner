@@ -76,7 +76,11 @@ onMounted(async () => {
             </div>
         </div>
         <div>
-            {{ _window.Telegram }}
+            {{ _window.WebAppUser }}
+            <hr>
+            {{ _window.Telegram.WebApp }}
+            <hr>
+            {{ _window.Telegram.ThemeParams }}
         </div>
     </div>
     <!-- don't move elements from pageConteiner -->
