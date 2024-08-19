@@ -60,7 +60,7 @@ onMounted(async () => {
         await userStore.login(initDataUnsafe.value?.user)
     }
     if (_window.Telegram.ThemeParams) {
-        _window.Telegram.ThemeParams.bg_color = '#121212'
+        _window.Telegram.WebApp.themeParams.bg_color = '#121212'
     }
 })
 </script>
@@ -80,7 +80,7 @@ onMounted(async () => {
             <hr>
             WebApp: {{ _window.Telegram.WebApp }}
             <hr>
-            WebApp.ThemeParams: {{ _window.Telegram.WebApp.ThemeParams }}
+            WebApp.ThemeParams: {{ _window.Telegram.WebApp.themeParams }}
         </div>
     </div>
     <!-- don't move elements from pageConteiner -->
