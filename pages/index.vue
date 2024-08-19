@@ -38,33 +38,36 @@ onMounted(() => {
 })
 
 let _window: any = window
-let initDataUnsafe = ref<any>({
-    query_id: "eto kto voobshe?",
-    user: {
-        // it's my actual id
-        id: 1155714398,
-        first_name: 'Григорий',
-        last_name: 'Дзюин',
-        username: 'jet_green',
-        language_code: "en"
-    },
-    auth_date: Date.now(),
-    hash: 'da xep ego znaet'
-})
+// let initDataUnsafe = ref<any>({
+//     query_id: "eto kto voobshe?",
+//     user: {
+//         // it's my actual id
+//         id: 1155714398,
+//         first_name: 'Григорий',
+//         last_name: 'Дзюин',
+//         username: 'jet_green',
+//         language_code: "en"
+//     },
+//     auth_date: Date.now(),
+//     hash: 'da xep ego znaet'
+// })
 
 onMounted(async () => {
     console.log(_window.Telegram);
     
-    if (_window.Telegram.WebApp?.initDataUnsafe?.user?.id) {
-        initDataUnsafe.value = _window.Telegram.WebApp.initDataUnsafe
-    }
-    if (initDataUnsafe.value.user?.id) {
-        await userStore.login(initDataUnsafe.value?.user)
+    // if (_window.Telegram.WebApp?.initDataUnsafe?.user?.id) {
+    //     initDataUnsafe.value = _window.Telegram.WebApp.initDataUnsafe
+    // }
+    let user: any = {}
+    if (_window.Telegram.WebView.initParams.user) {
+        user = JSON.parse(_window.Telegram.WebView.initParams.user)
+        console.log('WebView.initParams.user: ', user);
     }
     if (_window.Telegram.ThemeParams) {
         _window.Telegram.WebApp.themeParams.bg_color = '#121212'
         _window.Telegram.WebApp.colorScheme = 'dark'
     }
+    await userStore.login(user)
 })
 </script>
 <template>
