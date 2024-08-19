@@ -53,6 +53,8 @@ let initDataUnsafe = ref<any>({
 })
 
 onMounted(async () => {
+    console.log(_window.Telegram);
+    
     if (_window.Telegram.WebApp?.initDataUnsafe?.user?.id) {
         initDataUnsafe.value = _window.Telegram.WebApp.initDataUnsafe
     }
@@ -76,20 +78,10 @@ onMounted(async () => {
                 <p class="unbounded-bold text-3xl">1488</p>
             </div>
         </div>
-        <div style="color: green;">
-            WebApp.initDataUnsafe: {{ _window.Telegram.WebApp?.initDataUnsafe }}
-            <hr>
-            WebApp: {{ _window.Telegram.WebApp }}
-            <hr>
-            WebApp.ThemeParams: {{ _window.Telegram.WebApp.themeParams }}
-            <hr>
-            Telegram: {{ _window.Telegram }}
-        </div>
     </div>
     <!-- don't move elements from pageConteiner -->
     <!-- don't move elements from pageConteiner -->
     <!-- don't move elements from pageConteiner -->
-
 
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
