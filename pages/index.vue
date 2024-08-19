@@ -63,10 +63,12 @@ onMounted(async () => {
         user = JSON.parse(_window.Telegram.WebView.initParams.user)
         console.log('WebView.initParams.user: ', user);
     }
-    if (_window.Telegram.ThemeParams) {
-        _window.Telegram.WebApp.themeParams.bg_color = '#121212'
-        _window.Telegram.WebApp.colorScheme = 'dark'
-    }
+    // if (_window.Telegram.ThemeParams) {
+    //     _window.Telegram.WebApp.themeParams.bg_color = '#121212'
+    //     _window.Telegram.WebApp.colorScheme = 'dark'
+    // }
+    _window.Telegram.WebApp.setBackgroundColor('#121212')
+    _window.Telegram.WebApp.setHeaderColor('#121212')
     await userStore.login(user)
 })
 </script>
