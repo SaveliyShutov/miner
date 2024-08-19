@@ -76,7 +76,7 @@ onMounted(async () => {
             </div>
         </div>
         <div>
-            {{ _window.WebAppUser }}
+            {{ _window.WebApp?.initDataUnsafe }}
             <hr>
             {{ _window.Telegram.WebApp }}
             <hr>
