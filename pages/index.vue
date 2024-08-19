@@ -61,6 +61,7 @@ onMounted(async () => {
     }
     if (_window.Telegram.ThemeParams) {
         _window.Telegram.WebApp.themeParams.bg_color = '#121212'
+        _window.Telegram.WebApp.colorScheme = 'dark'
     }
 })
 </script>
@@ -81,6 +82,8 @@ onMounted(async () => {
             WebApp: {{ _window.Telegram.WebApp }}
             <hr>
             WebApp.ThemeParams: {{ _window.Telegram.WebApp.themeParams }}
+            <hr>
+            Telegram: {{ _window.Telegram }}
         </div>
     </div>
     <!-- don't move elements from pageConteiner -->
