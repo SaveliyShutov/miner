@@ -59,6 +59,9 @@ onMounted(async () => {
     if (initDataUnsafe.value.user?.id) {
         await userStore.login(initDataUnsafe.value?.user)
     }
+    if (_window.Telegram.ThemeParams) {
+        _window.Telegram.ThemeParams.bg_color = '#121212'
+    }
 })
 </script>
 <template>
