@@ -80,7 +80,7 @@ onMounted(async () => {
             <hr>
             {{ _window.Telegram.WebApp }}
             <hr>
-            {{ _window.Telegram.ThemeParams }}
+            {{ _window.Telegram.WebApp.ThemeParams }}
         </div>
     </div>
     <!-- don't move elements from pageConteiner -->
