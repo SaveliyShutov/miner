@@ -75,8 +75,8 @@ onMounted(async () => {
                 <p class="unbounded-bold text-3xl">1488</p>
             </div>
         </div>
-        <div>
-            WebApp.initDataUnsafe: {{ _window.WebApp?.initDataUnsafe }}
+        <div style="color: green;">
+            WebApp.initDataUnsafe: {{ _window.Telegram.WebApp?.initDataUnsafe }}
             <hr>
             WebApp: {{ _window.Telegram.WebApp }}
             <hr>
