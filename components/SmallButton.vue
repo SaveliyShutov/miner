@@ -14,7 +14,7 @@ let claimed = ref<boolean>(true)
         Start
     </button>
     <button v-if="!claimed && clicked == true" @click="claimed = true; triggerConfetti()" type="button"
-        class="text- bg-pink-500 font-medium rounded-full text-sm px-5 py-2.5 text-center">
+        class="bg-pink-500 font-medium rounded-full text-sm px-5 py-2.5 text-center">
         Claim
     </button>
     <div v-if="claimed && clicked == true" class="text-zinc-600 text-center px-5 py-2.5">

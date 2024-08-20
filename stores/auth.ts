@@ -22,10 +22,27 @@ export const useAuth = defineStore('auth', () => {
             console.log(error);
         }
     }
+    async function userClaimed(tgUser: UserFromTg) {
+        try {
+            let res: any = await useFetch('http://localhost:3030/auth/claim', {
+                method: 'POST',
+                body: {
+                    user: tgUser
+                }
+            })
+            if (res.status.value == 'success') {
+                user.value = res.data.value
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         // variables
         isAuth, user,
         // functions
-        login
+        login,
+        userClaimed
     }
 })

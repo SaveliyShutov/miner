@@ -3,18 +3,26 @@ import gsap from "gsap"
 import { DailyModal } from '#components'
 
 const userStore = useAuth()
+const user = storeToRefs(userStore)
 const modal = useModal()
 
 let pageContainer: any = ref(null)
 let { height } = useWindowSize()
 
-function setMargin(newWindowHeight: number) {    
+function setMargin(newWindowHeight: number) {
     if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
         // прибавляем высоту кнопки, чтобы можно было проскроллить
         pageContainer.value.style.paddingBottom = '48px'
     } else {
         pageContainer.value.style.paddingBottom = '0px'
     }
+}
+
+async function claimed() {
+    if (initDataUnsafe.value.user?.id) {
+        await userStore.userClaimed(initDataUnsafe.value?.user)
+    }
+    
 }
 
 watch(height, (newWindowHeight) => {
@@ -24,17 +32,7 @@ watch(height, (newWindowHeight) => {
 onMounted(() => {
     setMargin(height.value)
 
-    modal.open(DailyModal)
-
-    const box = document.querySelector(".box")!
-    box.addEventListener("click", () => {
-        gsap.to(box, {
-            scale: 0.9,
-            yoyo: true,
-            duration: 0.2,
-            repeat: 1,
-        })
-    })
+    // modal.open(DailyModal)
 })
 
 let _window: any = window
@@ -65,11 +63,12 @@ onMounted(async () => {
     <div ref="pageContainer">
         <div class="flex flex-col items-center pt-20">
             <div class="flex items-center justify-center w-28 h-28 bg-green-800 rounded-full">
-                <span class="unbounded-bold text-7xl text-white">S</span>
+                <span class="unbounded-bold text-7xl text-white">{{ userStore.user?.first_name[0] }}</span>
             </div>
-            <span class="mt-3 unbounded-medium text-2xl text-white">{{ userStore.user?.first_name }} {{ userStore.user?.last_name }}</span>
+            <span class="mt-3 unbounded-medium text-2xl text-white">{{ userStore.user?.first_name }} {{
+                userStore.user?.last_name }}</span>
             <div class="flex items-center mt-10">
-                <p class="unbounded-bold text-3xl">1488</p>
+                <p class="unbounded-bold text-7xl">1488</p>
             </div>
         </div>
         <div>
@@ -83,9 +82,15 @@ onMounted(async () => {
 
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
-        <button type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
+        <button @click="claimed()" v-if="!userStore.user?.isClaimed " type="button"
+            class="z-2 box w-full bg-pink-500 rounded-lg py-2.5">
             <p class="unbounded-regular text-lg">
                 гриша какашка
+            </p>
+        </button>
+        <button v-else type="button" class="z-2 w-full text-zinc-400 bg-zinc-700 rounded-lg py-2.5">
+            <p class="unbounded-regular text-lg">
+                да подожди ты
             </p>
         </button>
     </div>
