@@ -6,12 +6,14 @@ export const useAuth = defineStore('auth', () => {
     let isAuth = ref<boolean>(false)
     let user = ref<UserFromDb>()
 
+    const SERVER_URL = 'http://localhost:3030'
+
     async function login(tgUser: UserFromTg) {
         try {
-            let res: any = await useFetch('http://localhost:3030/auth/login', {
+            let res: any = await useFetch(SERVER_URL + '/auth/login', {
                 method: 'POST',
                 body: {
-                    user: tgUser
+                    user: tgUser,
                 }
             })
             if (res.status.value == 'success') {
@@ -22,16 +24,21 @@ export const useAuth = defineStore('auth', () => {
             console.log(error);
         }
     }
-    async function userClaimed(tgUser: UserFromTg) {
+
+    async function startEarn() {
         try {
-            let res: any = await useFetch('http://localhost:3030/auth/claim', {
+            let res: any = await useFetch(SERVER_URL + '/auth/start-earn', {
                 method: 'POST',
                 body: {
-                    user: tgUser
+                    // pass the tgId!!!!!!
+                    tgId: user.value?.id,
+                    startEarnDate: new Date()
                 }
             })
+            console.log(res);
+            
             if (res.status.value == 'success') {
-                user.value = res.data.value
+
             }
         } catch (error) {
             console.log(error);
@@ -42,7 +49,6 @@ export const useAuth = defineStore('auth', () => {
         // variables
         isAuth, user,
         // functions
-        login,
-        userClaimed
+        login, startEarn
     }
 })
