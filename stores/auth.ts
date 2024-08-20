@@ -6,12 +6,14 @@ export const useAuth = defineStore('auth', () => {
     let isAuth = ref<boolean>(false)
     let user = ref<UserFromDb>()
 
+    const SERVER_URL = 'http://localhost:3030'
+
     async function login(tgUser: UserFromTg) {
         try {
-            let res: any = await useFetch('http://localhost:3030/auth/login', {
+            let res: any = await useFetch(SERVER_URL + '/auth/login', {
                 method: 'POST',
                 body: {
-                    user: tgUser
+                    user: tgUser,
                 }
             })
             if (res.status.value == 'success') {
@@ -22,10 +24,31 @@ export const useAuth = defineStore('auth', () => {
             console.log(error);
         }
     }
+
+    async function startEarn() {
+        try {
+            let res: any = await useFetch(SERVER_URL + '/auth/start-earn', {
+                method: 'POST',
+                body: {
+                    // pass the tgId!!!!!!
+                    tgId: user.value?.id,
+                    startEarnDate: new Date()
+                }
+            })
+            console.log(res);
+            
+            if (res.status.value == 'success') {
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         // variables
         isAuth, user,
         // functions
-        login
+        login, startEarn
     }
 })

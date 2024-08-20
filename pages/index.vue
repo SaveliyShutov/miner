@@ -7,36 +7,6 @@ const modal = useModal()
 
 let pageContainer: any = ref(null)
 let { height } = useWindowSize()
-
-function setMargin(newWindowHeight: number) {    
-    if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
-        // прибавляем высоту кнопки, чтобы можно было проскроллить
-        pageContainer.value.style.paddingBottom = '48px'
-    } else {
-        pageContainer.value.style.paddingBottom = '0px'
-    }
-}
-
-watch(height, (newWindowHeight) => {
-    setMargin(newWindowHeight)
-})
-
-onMounted(() => {
-    setMargin(height.value)
-
-    modal.open(DailyModal)
-
-    const box = document.querySelector(".box")!
-    box.addEventListener("click", () => {
-        gsap.to(box, {
-            scale: 0.9,
-            yoyo: true,
-            duration: 0.2,
-            repeat: 1,
-        })
-    })
-})
-
 let _window: any = window
 // let initDataUnsafe = ref<any>({
 //     query_id: "eto kto voobshe?",
@@ -52,21 +22,44 @@ let _window: any = window
 //     hash: 'da xep ego znaet'
 // })
 
+function setMargin(newWindowHeight: number) {    
+    if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
+        // прибавляем высоту кнопки, чтобы можно было проскроллить
+        pageContainer.value.style.paddingBottom = '48px'
+    } else {
+        pageContainer.value.style.paddingBottom = '0px'
+    }
+}
+async function startEarn() {
+    await userStore.startEarn()
+}
+
+watch(height, (newWindowHeight) => {
+    setMargin(newWindowHeight)
+})
+
 onMounted(async () => {
-    console.log(_window.Telegram);
+    setMargin(height.value)
+
+    modal.open(DailyModal)
+
+    const box = document.querySelector(".box")!
+    box.addEventListener("click", () => {
+        gsap.to(box, {
+            scale: 0.9,
+            yoyo: true,
+            duration: 0.2,
+            repeat: 1,
+        })
+    })
+
+    console.log(_window.Telegram.WebView);
     
-    // if (_window.Telegram.WebApp?.initDataUnsafe?.user?.id) {
-    //     initDataUnsafe.value = _window.Telegram.WebApp.initDataUnsafe
-    // }
     let user: any = {}
     if (_window.Telegram.WebView.initParams.user) {
         user = JSON.parse(_window.Telegram.WebView.initParams.user)
         console.log('WebView.initParams.user: ', user);
     }
-    // if (_window.Telegram.ThemeParams) {
-    //     _window.Telegram.WebApp.themeParams.bg_color = '#121212'
-    //     _window.Telegram.WebApp.colorScheme = 'dark'
-    // }
     _window.Telegram.WebApp.setBackgroundColor('#121212')
     _window.Telegram.WebApp.setHeaderColor('#121212')
     await userStore.login(user)
@@ -90,7 +83,7 @@ onMounted(async () => {
 
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
-        <button type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
+        <button type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5" @click="startEarn">
             <p class="unbounded-regular text-lg">
                 гриша какашка
             </p>
