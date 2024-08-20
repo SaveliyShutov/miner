@@ -53,7 +53,7 @@ onMounted(async () => {
         })
     })
 
-    console.log(_window.Telegram.WebView);
+    console.log(_window.Telegram);
     
     let user: any = {}
     if (_window.Telegram.WebView.initParams.user) {
