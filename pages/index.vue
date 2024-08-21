@@ -60,7 +60,21 @@ function setMargin(newWindowHeight: number) {
     }
 }
 async function startEarn() {
+    gsap.to('.box', {
+        scale: 0.9,
+        yoyo: true,
+        duration: 0.25,
+        repeat: 1,
+    })
+
     await userStore.startEarn()
+    intervalFunctionId = setInterval(async () => {
+        timeLeft.value = await getTimeLeft()
+        gsap.to('#token-count', {
+            duration: 0.51,
+            text: currentTokenCount.value.toFixed(1),
+        })
+    }, 1000)
 }
 
 watch(height, (newWindowHeight) => {
@@ -80,18 +94,6 @@ onMounted(async () => {
     }, 1000)
 
     modal.open(DailyModal)
-
-    const box = document.querySelector(".box")
-    if (box) {
-        box.addEventListener("click", () => {
-            gsap.to(box, {
-                scale: 0.9,
-                yoyo: true,
-                duration: 0.2,
-                repeat: 1,
-            })
-        })
-    }
 
     console.log(_window.Telegram);
 

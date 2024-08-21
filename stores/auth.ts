@@ -35,10 +35,9 @@ export const useAuth = defineStore('auth', () => {
                     startEarnDate: new Date()
                 }
             })
-            console.log(res);
             
             if (res.status.value == 'success') {
-
+                user.value = res.data.value
             }
         } catch (error) {
             console.log(error);
