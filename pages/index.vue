@@ -130,8 +130,8 @@ onMounted(async () => {
             </div>
             <span class="mt-3 unbounded-medium text-2xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
-            <div class="flex items-center mt-10">
-                <p class="unbounded-bold text-7xl" id="token-count"></p>
+            <div class="flex items-center mt-10" style="overflow-x: hidden;">
+                <p class="unbounded-bold text-3xl" id="token-count"></p>
             </div>
         </div>
     </div>
