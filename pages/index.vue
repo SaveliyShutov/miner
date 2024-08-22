@@ -3,22 +3,46 @@ import gsap from "gsap"
 import { DailyModal } from '#components'
 
 const userStore = useAuth()
-const user = storeToRefs(userStore)
 const modal = useModal()
 
 let pageContainer: any = ref(null)
 let { height } = useWindowSize()
 let _window: any = window
 let timeLeft = ref<string>('')
+let startTokenCount: number = 0.0;
+let currentTokenCount = ref<number>(0.0)
+// это нужно, чтобы использовать метод clearInterval
+let intervalFunctionId: any;
 
 
-function getTimeLeft() {
-    if (!userStore.user?.startEarnDate) return ''
+let submitted = ref(false)
+async function getTimeLeft() {
+    // кароче я даун, поэтому, когда у нас 8 часов прошло или
+    // пользователь ещё ни разу не наживал на кнопку, то функция возвращает -1
+    if (!userStore.user?.startEarnDate) return '-1'
 
     let startDate = new Date(userStore.user?.startEarnDate)
     // сколько СЕКУНД прошло с нажатия кнопки
     let timePassed = Math.floor((Date.now() - startDate.getTime()) / 1000)
     let delta = 8 * 60 * 60 - timePassed
+
+    // если время закончилось, то начислить пользователю все токены, которые он заработал за 8 часов
+    // И ОТПРАВИТЬ В БАЗУ
+    if (delta < 0) {
+        // доп защита, чтобы не попасть на миллионы от яндекса
+        if (!submitted.value) {
+            if (!userStore.user?.isClaimed) {
+                currentTokenCount.value += 8 * 60 * 60 * 0.25
+                await userStore.setTokenCount(currentTokenCount.value)
+            }
+        }
+        submitted.value = true
+        clearInterval(intervalFunctionId);
+        return '-1'
+    }
+    // если время не закончилось, то начислить токены, которые он заработал за это время
+    // В БАЗУ !НЕ! ОТПРАВЛЯТЬ
+    currentTokenCount.value = startTokenCount + timePassed * 0.25
 
     let hours = Math.floor(delta / 60 / 60)
     let minutes = Math.floor((delta - hours * 60 * 60) / 60)
@@ -36,7 +60,21 @@ function setMargin(newWindowHeight: number) {
     }
 }
 async function startEarn() {
+    gsap.to('.box', {
+        scale: 0.9,
+        yoyo: true,
+        duration: 0.25,
+        repeat: 1,
+    })
+
     await userStore.startEarn()
+    intervalFunctionId = setInterval(async () => {
+        timeLeft.value = await getTimeLeft()
+        gsap.to('#token-count', {
+            duration: 0.51,
+            text: currentTokenCount.value.toFixed(1),
+        })
+    }, 1000)
 }
 
 watch(height, (newWindowHeight) => {
@@ -49,6 +87,16 @@ onMounted(async () => {
     if (!timeLeft) {
         modal.open(DailyModal)
     }
+    timeLeft.value = await getTimeLeft()
+    intervalFunctionId = setInterval(async () => {
+        timeLeft.value = await getTimeLeft()
+        gsap.to('#token-count', {
+            duration: 0.51,
+            text: currentTokenCount.value.toFixed(1),
+        })
+    }, 1000)
+
+    modal.open(DailyModal)
 
     console.log(_window.Telegram);
 
@@ -71,9 +119,10 @@ onMounted(async () => {
             language_code: "en"
         })
     }
-    setInterval(() => {
-        timeLeft.value = getTimeLeft()
-    }, 1000)
+    if (userStore.user?.tokenCount) {
+        currentTokenCount.value = userStore.user?.tokenCount
+        startTokenCount = userStore.user?.tokenCount
+    }
 })
 </script>
 <template>
@@ -84,8 +133,8 @@ onMounted(async () => {
             </div>
             <span class="mt-3 unbounded-medium text-2xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
-            <div class="flex items-center mt-10">
-                <p class="unbounded-bold text-7xl">1488</p>
+            <div class="flex items-center mt-10" style="overflow-x: hidden;">
+                <p class="unbounded-bold text-3xl" id="token-count"></p>
             </div>
         </div>
     </div>
@@ -95,8 +144,9 @@ onMounted(async () => {
 
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
-        <button v-if="!timeLeft" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5" @click="startEarn">
-            <p class="unbounded-regular text-lg" >
+        <button v-if="timeLeft == '-1'" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5"
+            @click="startEarn">
+            <p class="unbounded-regular text-lg">
                 начать
             </p>
         </button>

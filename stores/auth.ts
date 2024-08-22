@@ -35,20 +35,35 @@ export const useAuth = defineStore('auth', () => {
                     startEarnDate: new Date()
                 }
             })
-            console.log(res);
             
             if (res.status.value == 'success') {
-
+                user.value = res.data.value
             }
         } catch (error) {
             console.log(error);
         }
     }
 
+    async function setTokenCount(tokenCount: number) {
+        try {
+            let res: any = await useFetch(SERVER_URL + '/auth/set-token-count', {
+                method: 'PUT',
+                body: {
+                    // pass the tgId!!!!!!
+                    tgId: user.value?.id,
+                    newTokenCount: tokenCount
+                }
+            })
+            return res
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
     return {
         // variables
         isAuth, user,
         // functions
-        login, startEarn
+        login, startEarn, setTokenCount
     }
 })
