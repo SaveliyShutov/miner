@@ -39,13 +39,6 @@ async function startEarn() {
     await userStore.startEarn()
 }
 
-async function claimed() {
-    if (initDataUnsafe.value.user?.id) {
-        await userStore.userClaimed(initDataUnsafe.value?.user)
-    }
-    
-}
-
 watch(height, (newWindowHeight) => {
     setMargin(newWindowHeight)
 })
@@ -53,17 +46,9 @@ watch(height, (newWindowHeight) => {
 onMounted(async () => {
     setMargin(height.value)
 
-    modal.open(DailyModal)
-
-    const box = document.querySelector(".box")!
-    box.addEventListener("click", () => {
-        gsap.to(box, {
-            scale: 0.9,
-            yoyo: true,
-            duration: 0.2,
-            repeat: 1,
-        })
-    })
+    if (!timeLeft) {
+        modal.open(DailyModal)
+    }
 
     console.log(_window.Telegram);
 
@@ -110,17 +95,14 @@ onMounted(async () => {
 
     <!-- it's a global style -->
     <div class="bottom-button-container px-6">
-        <button type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5" @click="startEarn">
-            <p class="unbounded-regular text-lg" v-if="!timeLeft">
+        <button v-if="!timeLeft" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5" @click="startEarn">
+            <p class="unbounded-regular text-lg" >
                 начать
-            </p>
-            <p class="unbounded-regular text-lg">
-                {{ timeLeft }}
             </p>
         </button>
         <button v-else type="button" class="z-2 w-full text-zinc-400 bg-zinc-700 rounded-lg py-2.5">
             <p class="unbounded-regular text-lg">
-                да подожди ты
+                {{ timeLeft }}
             </p>
         </button>
     </div>
