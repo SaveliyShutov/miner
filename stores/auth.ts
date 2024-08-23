@@ -17,7 +17,6 @@ export const useAuth = defineStore('auth', () => {
                     user: tgUser,
                 }
             })
-            
             if (res.status.value == 'success') {
                 user.value = res.data.value
                 isAuth.value = true
