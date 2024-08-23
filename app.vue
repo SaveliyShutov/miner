@@ -23,6 +23,8 @@ onMounted(async () => {
   if (!user) {
     user = _window.Telegram.WebApp.initDataUnsafe.user
   }
+  console.log(user);
+  
   _window.Telegram.WebApp.setBackgroundColor('#121212')
   _window.Telegram.WebApp.setHeaderColor('#121212')
   // в dev нет user, поэтому используем подставного
