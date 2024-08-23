@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {toast} from 'vue3-toastify'
+
 let props = defineProps<{
     isOpen: boolean
 }>()
@@ -6,6 +8,16 @@ let props = defineProps<{
 let emit = defineEmits(['close'])
 
 let { isOpen } = toRefs(props)
+
+async function copyAndClose() {
+    await navigator.clipboard.writeText('http://lcoalhost:4300')
+    toast('Скопирвано!', {
+        type: "success",
+        hideProgressBar: true,
+        autoClose: 900
+    })
+    emit('close')
+}
 </script>
 <template>
     <UModal :ui="{ background: 'bg-white dark:bg-neutral-900' }" fullscreen v-model="isOpen">
@@ -17,7 +29,7 @@ let { isOpen } = toRefs(props)
             </div>
         </div>
         <div class="absolute bottom-0 left-0 w-full px-6 pb-4">
-            <button @click="emit('close')" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
+            <button @click="copyAndClose" type="button" class="z-2 box w-full text-black bg-white rounded-lg py-2.5">
                 <p class="unbounded-regular text-lg">
                     Скопировать ссылку
                 </p>

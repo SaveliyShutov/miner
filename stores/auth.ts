@@ -46,7 +46,7 @@ export const useAuth = defineStore('auth', () => {
 
     async function setTokenCount(tokenCount: number) {
         try {
-            let res: any = await useFetch(SERVER_URL + '/auth/set-token-count', {
+            let res: any = await $fetch(SERVER_URL + '/auth/set-token-count', {
                 method: 'PUT',
                 body: {
                     // pass the tgId!!!!!!
@@ -57,6 +57,7 @@ export const useAuth = defineStore('auth', () => {
             return res
         } catch (error) {
             console.log(error);
+            return error
         }
     } 
 

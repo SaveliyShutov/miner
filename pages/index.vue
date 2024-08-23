@@ -54,7 +54,7 @@ async function getTimeLeft() {
 function setMargin(newWindowHeight: number) {
     if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
         // прибавляем высоту кнопки, чтобы можно было проскроллить
-        pageContainer.value.style.paddingBottom = '48px'
+        pageContainer.value.style.paddingBottom = '56px'
     } else {
         pageContainer.value.style.paddingBottom = '0px'
     }
