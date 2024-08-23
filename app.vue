@@ -20,7 +20,7 @@ onMounted(async () => {
     user = JSON.parse(_window.Telegram.WebView.initParams.user)
     console.log('WebView.initParams.user: ', user);
   }
-  if (!user) {
+  if (!user.id) {
     user = _window.Telegram.WebApp.initDataUnsafe.user
   }
   console.log(user);
