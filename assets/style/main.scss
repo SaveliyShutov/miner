@@ -51,8 +51,8 @@ body {
 :root {
     .Toastify__toast-theme--dark {
         --toastify-color-dark: rgba(12,12,12, 1);
-        border-radius: 20px;
-        border: 2px solid #6868681a;
+        border-radius: 12px;
+        border: 1px solid #6868681a;
         margin: 10px 20px;
         font-family: "Unbounded", sans-serif;
     }

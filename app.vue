@@ -7,6 +7,34 @@ useHead({
     }
   ]
 })
+
+let userStore = useAuth()
+
+let _window: any = window
+
+onMounted(async () => {
+  console.log(_window.Telegram);
+
+  let user: any = {}
+  if (_window.Telegram.WebView.initParams.user) {
+    user = JSON.parse(_window.Telegram.WebView.initParams.user)
+    console.log('WebView.initParams.user: ', user);
+  }
+  _window.Telegram.WebApp.setBackgroundColor('#121212')
+  _window.Telegram.WebApp.setHeaderColor('#121212')
+  // в dev нет user, поэтому используем подставного
+  if (user.id) {
+    await userStore.login(user)
+  } else {
+    await userStore.login({
+      id: '1155714398',
+      first_name: 'Григорий',
+      last_name: 'Дзюин',
+      username: 'jet_green',
+      language_code: "en"
+    })
+  }
+})
 </script>
 <template>
   <div>

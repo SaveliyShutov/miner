@@ -6,11 +6,12 @@ let props = defineProps<{
 }>()
 
 let emit = defineEmits(['close'])
+let userStore = useAuth()
 
 let { isOpen } = toRefs(props)
 
 async function copyAndClose() {
-    await navigator.clipboard.writeText('http://lcoalhost:4300')
+    await navigator.clipboard.writeText(`http://localhost:3000?friend_tg_id=${userStore.user?.id}`)
     toast('Скопирвано!', {
         type: "success",
         hideProgressBar: true,

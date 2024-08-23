@@ -5,6 +5,7 @@ import { DailyModal } from '#components'
 const userStore = useAuth()
 const modal = useModal()
 
+let { user } = storeToRefs(userStore)
 let pageContainer: any = ref(null)
 let { height } = useWindowSize()
 let _window: any = window
@@ -70,9 +71,9 @@ async function startEarn() {
     await userStore.startEarn()
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()
-        let tokenCountText = document.getElementById('token-count')
-        if (tokenCountText) {
-            gsap.to(tokenCountText, {
+        let tokenCountElement = document.getElementById('token-count')
+        if (tokenCountElement) {
+            gsap.to(tokenCountElement, {
                 duration: 0.51,
                 text: currentTokenCount.value.toFixed(1),
             })
@@ -83,13 +84,15 @@ async function startEarn() {
 watch(height, (newWindowHeight) => {
     setMargin(newWindowHeight)
 })
-
 onMounted(async () => {
     setMargin(height.value)
 
     if (!timeLeft) {
         modal.open(DailyModal)
     }
+    currentTokenCount.value = userStore.user?.tokenCount ?? 0.0
+    startTokenCount = userStore.user?.tokenCount ?? 0.0
+
     timeLeft.value = await getTimeLeft()
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()
@@ -101,34 +104,10 @@ onMounted(async () => {
             })
         }
     }, 1000)
-
     modal.open(DailyModal)
-
-    console.log(_window.Telegram);
-
-    let user: any = {}
-    if (_window.Telegram.WebView.initParams.user) {
-        user = JSON.parse(_window.Telegram.WebView.initParams.user)
-        console.log('WebView.initParams.user: ', user);
-    }
-    _window.Telegram.WebApp.setBackgroundColor('#121212')
-    _window.Telegram.WebApp.setHeaderColor('#121212')
-    // в dev нет user, поэтому используем подставного
-    if (user.id) {
-        await userStore.login(user)
-    } else {
-        await userStore.login({
-            id: '1155714398',
-            first_name: 'Григорий',
-            last_name: 'Дзюин',
-            username: 'jet_green',
-            language_code: "en"
-        })
-    }
-    if (userStore.user?.tokenCount) {
-        currentTokenCount.value = userStore.user?.tokenCount
-        startTokenCount = userStore.user?.tokenCount
-    }
+})
+onUnmounted(() => {
+    clearInterval(intervalFunctionId);
 })
 </script>
 <template>
