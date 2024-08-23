@@ -70,10 +70,13 @@ async function startEarn() {
     await userStore.startEarn()
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()
-        gsap.to('#token-count', {
-            duration: 0.51,
-            text: currentTokenCount.value.toFixed(1),
-        })
+        let tokenCountText = document.getElementById('token-count')
+        if (tokenCountText) {
+            gsap.to(tokenCountText, {
+                duration: 0.51,
+                text: currentTokenCount.value.toFixed(1),
+            })
+        }
     }, 1000)
 }
 
@@ -90,10 +93,13 @@ onMounted(async () => {
     timeLeft.value = await getTimeLeft()
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()
-        gsap.to('#token-count', {
-            duration: 0.51,
-            text: currentTokenCount.value.toFixed(1),
-        })
+        let tokenCountText = document.getElementById('token-count')
+        if (tokenCountText) {
+            gsap.to(tokenCountText, {
+                duration: 0.51,
+                text: currentTokenCount.value.toFixed(1),
+            })
+        }
     }, 1000)
 
     modal.open(DailyModal)
