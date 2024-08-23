@@ -11,7 +11,7 @@ export const useAuth = defineStore('auth', () => {
 
     async function login(tgUser: UserFromTg) {
         try {
-            console.log(tgUser);
+            console.log(SERVER_URL);
             
             let res: any = await useFetch(SERVER_URL + '/auth/login', {
                 method: 'POST',
