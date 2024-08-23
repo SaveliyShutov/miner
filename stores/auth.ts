@@ -5,8 +5,9 @@ import type { UserFromDb } from '@/interfaces/user-from-db'
 export const useAuth = defineStore('auth', () => {
     let isAuth = ref<boolean>(false)
     let user = ref<UserFromDb>()
+    const config = useRuntimeConfig()
 
-    const SERVER_URL = 'http://localhost:3030'
+    const SERVER_URL = config.public.apiBase
 
     async function login(tgUser: UserFromTg) {
         try {
