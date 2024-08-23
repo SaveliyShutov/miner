@@ -10,9 +10,7 @@ export const useAuth = defineStore('auth', () => {
     const SERVER_URL = config.public.apiBase
 
     async function login(tgUser: UserFromTg) {
-        try {
-            console.log(SERVER_URL);
-            
+        try {            
             let res: any = await useFetch(SERVER_URL + '/auth/login', {
                 method: 'POST',
                 body: {
