@@ -59,12 +59,27 @@ export const useAuth = defineStore('auth', () => {
             console.log(error);
             return error
         }
-    } 
+    }
+    async function addNewFriend(senderId: string, invitedId: string) {
+        try {
+            let res: any = await $fetch(SERVER_URL + '/auth/add-new-friend', {
+                method: 'POST',
+                body: {
+                    senderId,
+                    invitedId
+                }
+            })
+            return res
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
 
     return {
         // variables
         isAuth, user,
         // functions
-        login, startEarn, setTokenCount
+        login, startEarn, setTokenCount, addNewFriend
     }
 })

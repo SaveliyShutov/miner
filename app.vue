@@ -7,7 +7,7 @@ useHead({
     }
   ]
 })
-
+let route = useRoute()
 let userStore = useAuth()
 
 let _window: any = window
@@ -27,12 +27,17 @@ onMounted(async () => {
     await userStore.login(user)
   } else {
     await userStore.login({
+      // '1155714398'
       id: '1155714398',
       first_name: 'Григорий',
       last_name: 'Дзюин',
       username: 'jet_green',
       language_code: "en"
     })
+  }
+  if (route.query.friend_tg_id) {
+    if (user.id)
+      await userStore.addNewFriend(route.query.friend_tg_id.toString(), user.id)
   }
 })
 </script>
