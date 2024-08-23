@@ -84,6 +84,10 @@ async function startEarn() {
 watch(height, (newWindowHeight) => {
     setMargin(newWindowHeight)
 })
+watch(user, (newUser) => {
+    currentTokenCount.value = userStore.user?.tokenCount ?? 0.0
+    startTokenCount = userStore.user?.tokenCount ?? 0.0
+})
 onMounted(async () => {
     setMargin(height.value)
 
