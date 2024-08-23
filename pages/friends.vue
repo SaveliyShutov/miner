@@ -2,6 +2,7 @@
 let modal = ref(false)
 let pageContainer = ref()
 let { height } = useWindowSize()
+let userStore = useAuth()
 
 function setMargin(newWindowHeight: number) {
   if (pageContainer.value.offsetHeight >= (newWindowHeight - 90)) {
@@ -11,6 +12,10 @@ function setMargin(newWindowHeight: number) {
     pageContainer.value.style.paddingBottom = '0px'
   }
 }
+
+watch(height, (newHeight) => {
+  setMargin(newHeight)
+})
 
 onMounted(() => {
   setMargin(height.value)
@@ -32,7 +37,9 @@ onMounted(() => {
         <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🥭</span>Отправь другу
           и получи токены!</p>
       </div>
+      {{ userStore.user?.friends }}
     </div>
+
     <!-- <BottomButton @buttonClick="openModal"> пригласить друга </BottomButton> -->
     <InviteFriendModal :isOpen="modal" @close="modal = false" />
     <div class="bottom-button-container px-6">
