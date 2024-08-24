@@ -118,12 +118,12 @@ onUnmounted(() => {
     <div ref="pageContainer">
         <div class="flex flex-col items-center pt-20">
             <div class="flex items-center justify-center w-28 h-28 bg-green-800 rounded-full">
-                <span class="unbounded-bold text-7xl text-white">{{ userStore.user?.first_name[0] }}</span>
+                <span class="unbounded-bold text-6xl text-white">{{ userStore.user?.first_name[0] }}</span>
             </div>
-            <span class="mt-3 unbounded-medium text-2xl text-white">{{ userStore.user?.first_name }} {{
+            <span class="mt-3 unbounded-medium text-xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
             <div class="flex items-center mt-10" style="overflow-x: hidden;">
-                <p class="unbounded-bold text-3xl" id="token-count"></p>
+                <p class="unbounded-bold overflow-hidden text-5xl" id="token-count"></p>
             </div>
         </div>
     </div>

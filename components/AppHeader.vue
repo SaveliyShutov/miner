@@ -5,11 +5,11 @@ let router = useRouter()
 </script>
 
 <template>
-    <div class="fixed bottom-0 left-0 z-50 w-full h-20 pb-5" style="background: #121212;">
-        <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+    <div class="fixed bottom-0 left-0 z-50 w-full h-20 pb-3" style="background: #121212;">
+        <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
             <button @click="router.push('/')" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 group">
-                <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
                     class="text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -22,7 +22,7 @@ let router = useRouter()
             </button>
             <button @click="router.push('/friends')" type="button"
                 class="inline-flex flex-col items-center justify-center px-5 group">
-                <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
                     class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -32,14 +32,14 @@ let router = useRouter()
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Friends</span>
             </button>
             <button @click="router.push('/tasks')" type="button" class="inline-flex flex-col items-center justify-center px-5 group">
-                <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                     class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor">
                     <path fill=" currentColor"
                         d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H8V4h12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z" />
                 </svg>
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Tasks</span>
             </button>
-            <button type="button" class="inline-flex flex-col items-center justify-center px-5 group">
+            <!-- <button type="button" class="inline-flex flex-col items-center justify-center px-5 group">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                     class=" text-gray-400 group-hover:text-gray-300" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ let router = useRouter()
                     </g>
                 </svg>
                 <span class="text-sm dark:text-gray-400 group-hover:text-gray-200">Wallet</span>
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
