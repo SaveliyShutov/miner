@@ -61,13 +61,6 @@ function setMargin(newWindowHeight: number) {
     }
 }
 async function startEarn() {
-    gsap.to('.box', {
-        scale: 0.9,
-        yoyo: true,
-        duration: 0.25,
-        repeat: 1,
-    })
-
     await userStore.startEarn()
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()

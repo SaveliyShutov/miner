@@ -29,15 +29,6 @@ onMounted(() => {
 
       <p class="text-2xl unbounded-bold text-center">Приглашай друзей. Получай токены с ними</p>
 
-      <div class="w-full mt-10  flex justify-start">
-        <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🍌</span>Скопируй
-          ссылку</p>
-      </div>
-      <div class="w-full mt-5 flex justify-start">
-        <p class="text-base font-medium text-start flex align-center"><span class="banana mr-2">🥭</span>Отправь другу
-          и получи токены!</p>
-      </div>
-
       <div class="w-full mt-20">
         <p class="text-lg unbounded-medium">3 frends</p>
         <ul class="max-w-md divide-y divide-zinc-700 mt-3">
