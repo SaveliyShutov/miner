@@ -35,7 +35,7 @@ onMounted(() => {
 </script>
 <template>
     <UModal :ui="{ background: 'bg-neutral-900 dark:bg-neutral-900' }" fullscreen>
-        <div class="flex items-center justify-center px-6">
+        <div class="flex items-center justify-center px-6 text-white">
             <div class="flex flex-col items-center mt-20">
                 <img class="size-48" src="https://em-content.zobj.net/source/telegram/386/fire_1f525.webp">
                 <span class="mt-5 unbounded-bold text-2xl text-white text-center">Ваши ежедневные подарочки</span>

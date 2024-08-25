@@ -122,7 +122,7 @@ onUnmounted(() => {
             </div>
             <span class="mt-3 unbounded-medium text-xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
-            <div class="flex items-center mt-10" style="overflow-x: hidden;">
+            <div class="text-white flex items-center mt-10" style="overflow-x: hidden;">
                 <p class="unbounded-bold overflow-hidden text-5xl" id="token-count"></p>
             </div>
         </div>
