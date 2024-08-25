@@ -13,7 +13,7 @@ let userStore = useAuth()
 let _window: any = window
 
 onMounted(async () => {
-  console.log(_window.Telegram);
+  console.log(_window.Telegram.WebApp.version,'wqwdqwdq');
 
   let user: any = {}
   if (_window.Telegram.WebView.initParams.user) {
@@ -23,10 +23,6 @@ onMounted(async () => {
   if (!user.id) {
     user = _window.Telegram.WebApp.initDataUnsafe.user
   }
-  console.log(user);
-
-  console.log(_window.Telegram.WebView.initParams);
-  console.log(_window.Telegram.WebApp);
   _window.Telegram.WebApp.setBackgroundColor('#121212')
   _window.Telegram.WebApp.setHeaderColor('#121212')
   // в dev нет user, поэтому используем подставного
