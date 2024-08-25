@@ -30,7 +30,7 @@ onMounted(async () => {
   _window.Telegram.WebApp.setBackgroundColor('#121212')
   _window.Telegram.WebApp.setHeaderColor('#121212')
   // в dev нет user, поэтому используем подставного
-  if (user.id) {
+  if (user?.id) {
     await userStore.login(user)
   } else {
     await userStore.login({
