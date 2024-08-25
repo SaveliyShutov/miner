@@ -14,6 +14,7 @@ let _window: any = window
 
 onMounted(async () => {
   console.log(_window.Telegram.WebApp.version,'wqwdqwdq');
+  console.log(_window.Telegram.WebView.initParams,'aboba');
 
   let user: any = {}
   if (_window.Telegram.WebView.initParams.user) {
