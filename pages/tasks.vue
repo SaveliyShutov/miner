@@ -3,7 +3,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="flex justify-start flex-col">
+    <div class="flex justify-start flex-col text-white">
         <div class="mt-10 relative inline-flex items-center">
             <p class="text-2xl unbounded-bold">Tasks</p>
             <div class="relative -top-3 text-md unbounded-bold">
