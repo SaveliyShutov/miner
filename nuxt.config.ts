@@ -13,19 +13,9 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: false },
-  modules: ["@nuxt/ui", '@nuxtjs/color-mode', '@pinia/nuxt', '@vueuse/nuxt'],
+  modules: ["@nuxt/ui", '@pinia/nuxt', '@vueuse/nuxt'],
   pinia: {
     storesDirs: ['./stores/**'],
-  },
-  colorMode: {
-    preference: 'dark',
-    fallback: 'dark',
-    hid: 'nuxt-color-mode-script',
-    globalName: '__NUXT_COLOR_MODE__',
-    componentName: 'ColorScheme',
-    classPrefix: '',
-    classSuffix: '-mode',
-    storageKey: 'nuxt-color-mode'
   },
   plugins: [
     '~/plugins/gsap.ts',

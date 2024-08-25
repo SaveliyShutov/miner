@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import confetti from "canvas-confetti";
-import useConfetti from "canvas-confetti"
 const modal = useModal()
 
 onMounted(() => {
@@ -35,7 +34,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <UModal :ui="{ background: 'bg-white dark:bg-neutral-900' }" fullscreen>
+    <UModal :ui="{ background: 'bg-neutral-900 dark:bg-neutral-900' }" fullscreen>
         <div class="flex items-center justify-center px-6">
             <div class="flex flex-col items-center mt-20">
                 <img class="size-48" src="https://em-content.zobj.net/source/telegram/386/fire_1f525.webp">
