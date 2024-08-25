@@ -12,8 +12,9 @@ let userStore = useAuth()
 
 let _window: any = window
 
-_window.Telegram.WebApp.setBackgroundColor('#121212')
+_window.Telegram.WebApp.setBackgroundColor('#FF69B4')
 _window.Telegram.WebApp.setHeaderColor('#121212')
+console.log(_window.Telegram.WebView,'awdwdwad')
 
 
 onMounted(async () => {
