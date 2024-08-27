@@ -10,8 +10,10 @@ let pageContainer: any = ref(null)
 let { height } = useWindowSize()
 let _window: any = window
 let timeLeft = ref<string>('')
-let startTokenCount: number = 0.0;
-let currentTokenCount = ref<number>(0.0)
+let startTokenCount: number = 0;
+let currentTokenCount = ref<number>(0)
+let percentage = ref<number>(0)
+
 // это нужно, чтобы использовать метод clearInterval
 let intervalFunctionId: any;
 
@@ -33,7 +35,8 @@ async function getTimeLeft() {
         // доп защита, чтобы не попасть на миллионы от яндекса
         if (!submitted.value) {
             if (!userStore.user?.isClaimed) {
-                currentTokenCount.value += 8 * 60 * 60 * 0.25
+                currentTokenCount.value += 8 * 60 * 60 * 0.01
+                percentage.value = 100 - Math.floor((currentTokenCount.value % 1) * Math.pow(10, 2)) * 100;
                 await userStore.setTokenCount(currentTokenCount.value)
             }
         }
@@ -43,7 +46,8 @@ async function getTimeLeft() {
     }
     // если время не закончилось, то начислить токены, которые он заработал за это время
     // В БАЗУ !НЕ! ОТПРАВЛЯТЬ
-    currentTokenCount.value = startTokenCount + timePassed * 0.25
+    currentTokenCount.value = startTokenCount + timePassed * 0.01
+    percentage.value = Math.round(100 - (currentTokenCount.value - Math.trunc(currentTokenCount.value)) * 100)
 
     let hours = Math.floor(delta / 60 / 60)
     let minutes = Math.floor((delta - hours * 60 * 60) / 60)
@@ -67,8 +71,8 @@ async function startEarn() {
         let tokenCountElement = document.getElementById('token-count')
         if (tokenCountElement) {
             gsap.to(tokenCountElement, {
-                duration: 0.51,
-                text: currentTokenCount.value.toFixed(1),
+                duration: 0.41,
+                text: String(Math.floor(currentTokenCount.value)),
             })
         }
     }, 1000)
@@ -78,8 +82,8 @@ watch(height, (newWindowHeight) => {
     setMargin(newWindowHeight)
 })
 watch(user, (newUser) => {
-    currentTokenCount.value = userStore.user?.tokenCount ?? 0.0
-    startTokenCount = userStore.user?.tokenCount ?? 0.0
+    currentTokenCount.value = userStore.user?.tokenCount ?? 0
+    startTokenCount = userStore.user?.tokenCount ?? 0
 })
 onMounted(async () => {
     setMargin(height.value)
@@ -87,8 +91,8 @@ onMounted(async () => {
     if (!timeLeft) {
         modal.open(DailyModal)
     }
-    currentTokenCount.value = userStore.user?.tokenCount ?? 0.0
-    startTokenCount = userStore.user?.tokenCount ?? 0.0
+    currentTokenCount.value = userStore.user?.tokenCount ?? 0
+    startTokenCount = userStore.user?.tokenCount ?? 0
 
     timeLeft.value = await getTimeLeft()
     intervalFunctionId = setInterval(async () => {
@@ -96,12 +100,11 @@ onMounted(async () => {
         let tokenCountText = document.getElementById('token-count')
         if (tokenCountText) {
             gsap.to(tokenCountText, {
-                duration: 0.51,
-                text: currentTokenCount.value.toFixed(1),
+                duration: 0.41,
+                text: String(Math.floor(currentTokenCount.value)),
             })
         }
     }, 1000)
-    modal.open(DailyModal)
 })
 onUnmounted(() => {
     clearInterval(intervalFunctionId);
@@ -115,8 +118,20 @@ onUnmounted(() => {
             </div>
             <span class="mt-3 unbounded-medium text-xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
-            <div class="text-white flex items-center mt-10" style="overflow-x: hidden;">
-                <p class="unbounded-bold overflow-hidden text-5xl" id="token-count"></p>
+            <div class="relative size-60 mt-10">
+                <svg class="size-full -rotate-90" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-zinc-800" stroke-width="3">
+                    </circle>
+                    <circle cx="18" cy="18" r="16" fill="none" class="stroke-pink-500" stroke-width="3"
+                        stroke-dasharray="100" :stroke-dashoffset="percentage" stroke-linecap="round"></circle>
+                </svg>
+
+                <!-- Percentage Text -->
+                <div class="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                    <div class="text-white flex items-center" style="overflow-x: hidden;">
+                        <p class="unbounded-bold overflow-hidden text-5xl" id="token-count"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -139,3 +154,5 @@ onUnmounted(() => {
         </button>
     </div>
 </template>
+
+<style></style>

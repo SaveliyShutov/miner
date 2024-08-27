@@ -28,11 +28,11 @@ onMounted(async () => {
   } else {
     await userStore.login({
       // '1155714398'
-      id: '1155714398',
-      first_name: 'Григорий',
+      id: '885129018',
+      first_name: 'Савелий',
       last_name: 'Дзюин',
-      username: 'jet_green',
-      language_code: "en"
+      username: 'SaveliyShutov',
+      language_code: "ru"
     })
   }
   if (route.query.friend_tg_id) {
