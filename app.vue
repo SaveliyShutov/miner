@@ -22,6 +22,9 @@ onMounted(async () => {
     user = _window.Telegram.WebApp.initDataUnsafe.user
   }
   _window.Telegram.WebApp.setHeaderColor('#121212')
+  let friendTgId = _window.Telegram.WebApp.initDataUnsafe.start_param
+  console.log(friendTgId);
+  
   // в dev нет user, поэтому используем подставного
   if (user?.id) {
     await userStore.login(user)

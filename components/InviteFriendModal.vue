@@ -11,7 +11,7 @@ let userStore = useAuth()
 let { isOpen } = toRefs(props)
 
 async function copyAndClose() {
-    await navigator.clipboard.writeText(`http://localhost:3000?friend_tg_id=${userStore.user?.id}`)
+    await navigator.clipboard.writeText(`https://t.me/PlantCoin_bot/8b673d4d-7fc0-433a-9d41-c19ba39e016a?startapp=${userStore.user?.id}`)
     toast('Скопирвано!', {
         type: "success",
         hideProgressBar: true,
