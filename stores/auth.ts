@@ -22,7 +22,6 @@ export const useAuth = defineStore('auth', () => {
                 user.value = res.data.value
                 isAuth.value = true
             }
-            toast(res.status.value)
         } catch (error) {
             console.log(error);
         }
