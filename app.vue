@@ -27,6 +27,8 @@ onMounted(async () => {
   
   // в dev нет user, поэтому используем подставного
   if (user?.id) {
+    console.log('logged in user:', user);
+    
     await userStore.login(user)
   } else {
     await userStore.login({
