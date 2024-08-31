@@ -11,7 +11,7 @@ let route = useRoute()
 let userStore = useAuth()
 
 let _window: any = window
-
+let usr = ref<any>()
 onMounted(async () => {
   let user: any = {}
   if (_window.Telegram.WebView.initParams.user) {
@@ -24,7 +24,7 @@ onMounted(async () => {
   _window.Telegram.WebApp.setHeaderColor('#121212')
   let friendTgId = _window.Telegram.WebApp?.initDataUnsafe?.start_param
   console.log(friendTgId);
-  
+  usr.value = user
   // в dev нет user, поэтому используем подставного
   if (user?.id) {
     console.log('logged in user:', user);
@@ -48,7 +48,7 @@ onMounted(async () => {
 </script>
 <template>
   <div>
-    {{ userStore.user }}
+    tguser: {{ usr }}
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
