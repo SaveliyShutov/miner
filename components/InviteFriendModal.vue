@@ -11,7 +11,7 @@ let { isOpen } = toRefs(props)
 
 async function copyAndClose() {
     await navigator.clipboard.writeText(`https://t.me/PlantCoin_bot?start=${userStore.user?.id}`)
-    toast('Скопирвано!', {
+    toast('Скопировано!', {
         type: "success",
         hideProgressBar: true,
         autoClose: 900
