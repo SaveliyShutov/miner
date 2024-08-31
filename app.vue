@@ -43,7 +43,7 @@ onMounted(async () => {
   // if (route.query.friend_tg_id) {
   //   if (user.id)
   //     await userStore.addNewFriend(route.query.friend_tg_id.toString(), user.id)
-  }
+  // }
 })
 </script>
 <template>
