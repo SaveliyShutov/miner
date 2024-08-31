@@ -48,6 +48,7 @@ onMounted(async () => {
 </script>
 <template>
   <div>
+    {{ userStore.user }}
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
