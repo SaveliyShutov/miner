@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toast } from 'vue3-toastify';
+
 useHead({
   title: 'Plant Miner',
   script: [
@@ -11,7 +13,6 @@ let route = useRoute()
 let userStore = useAuth()
 
 let _window: any = window
-let usr = ref<any>()
 onMounted(async () => {
   let user: any = {}
   if (_window.Telegram.WebView.initParams.user) {
@@ -24,13 +25,15 @@ onMounted(async () => {
   _window.Telegram.WebApp.setHeaderColor('#121212')
   let friendTgId = _window.Telegram.WebApp?.initDataUnsafe?.start_param
   console.log(friendTgId);
-  usr.value = user
   // в dev нет user, поэтому используем подставного
   if (user?.id) {
     console.log('logged in user:', user);
     
     await userStore.login(user)
   } else {
+    toast('Wtf? tguser не найден', {
+      type: 'error'
+    })
     await userStore.login({
       // '1155714398'
       id: '885129018',
@@ -47,8 +50,7 @@ onMounted(async () => {
 })
 </script>
 <template>
-  <div>
-    tguser: {{ usr }}
+  <div> 
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
