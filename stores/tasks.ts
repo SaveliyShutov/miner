@@ -1,5 +1,6 @@
 import { toast } from "vue3-toastify"
 import type { TaskFromDb } from "~/interfaces/task-from-db.interface"
+import type { UserFromDb } from "~/interfaces/user-from-db"
 
 export const useTasks = defineStore('tasks', () => {
   let tasks = ref<TaskFromDb[]>([])
@@ -10,9 +11,6 @@ export const useTasks = defineStore('tasks', () => {
     let tasksFromDb: TaskFromDb[] | undefined = await $fetch(SERVER_URL + '/tasks/', {
       method: 'GET'
     })
-
-    console.log(tasksFromDb);
-    
 
     if (tasksFromDb?.length) {
       tasks.value = tasksFromDb
@@ -25,10 +23,24 @@ export const useTasks = defineStore('tasks', () => {
     }
   }
 
+  async function claimTask(taskId: string, userId: string) {
+    let userFromDB: UserFromDb | null = await $fetch(SERVER_URL + '/tasks/claim', {
+      method: 'POST',
+      body: {
+        taskId,
+        userId
+      }
+    })
+    const userStore = useAuth()
+    if (userFromDB?._id) {
+      userStore.user = userFromDB
+    }
+  }
+
   return {
     // variables
     tasks,
     // functions
-    getAll
+    getAll, claimTask
   }
 })
