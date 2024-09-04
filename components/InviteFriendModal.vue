@@ -7,12 +7,11 @@ let props = defineProps<{
 
 let emit = defineEmits(['close'])
 let userStore = useAuth()
-
 let { isOpen } = toRefs(props)
 
 async function copyAndClose() {
-    await navigator.clipboard.writeText(`http://localhost:3000?friend_tg_id=${userStore.user?.id}`)
-    toast('Скопирвано!', {
+    await navigator.clipboard.writeText(`https://t.me/PlantCoin_bot?start=${userStore.user?.id}`)
+    toast('Скопировано!', {
         type: "success",
         hideProgressBar: true,
         autoClose: 900

@@ -5,5 +5,6 @@ export interface UserFromDb extends UserFromTg {
   startEarnDate: string,
   tokenCount: number,
   isClaimed: boolean,
-  friends: object[]
+  friends: object[],
+  claimedTasks: string[],
 }

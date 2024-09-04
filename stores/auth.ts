@@ -1,5 +1,6 @@
 import type { UserFromTg } from '@/interfaces/user-from-tg'
 import type { UserFromDb } from '@/interfaces/user-from-db'
+import { toast } from 'vue3-toastify'
 
 
 export const useAuth = defineStore('auth', () => {
