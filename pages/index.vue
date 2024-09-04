@@ -35,7 +35,7 @@ async function getTimeLeft() {
         // доп защита, чтобы не попасть на миллионы от яндекса
         if (!submitted.value) {
             if (!userStore.user?.isClaimed) {
-                currentTokenCount.value += 8 * 60 * 60 * 0.01
+                currentTokenCount.value += 8 * 60 * 60 * 0.1
                 percentage.value = 100 - Math.floor((currentTokenCount.value % 1) * Math.pow(10, 2)) * 100;
                 await userStore.setTokenCount(currentTokenCount.value)
             }
@@ -46,7 +46,7 @@ async function getTimeLeft() {
     }
     // если время не закончилось, то начислить токены, которые он заработал за это время
     // В БАЗУ !НЕ! ОТПРАВЛЯТЬ
-    currentTokenCount.value = startTokenCount + timePassed * 0.01
+    currentTokenCount.value = startTokenCount + timePassed * 0.1
     percentage.value = Math.round(100 - (currentTokenCount.value - Math.trunc(currentTokenCount.value)) * 100)
 
     let hours = Math.floor(delta / 60 / 60)
@@ -101,7 +101,7 @@ onMounted(async () => {
         if (tokenCountText) {
             gsap.to(tokenCountText, {
                 duration: 0.41,
-                text: String(Math.floor(currentTokenCount.value)),
+                text: String((Math.floor(currentTokenCount.value))),
             })
         }
     }, 1000)
@@ -119,13 +119,10 @@ onUnmounted(() => {
             <span class="mt-3 unbounded-medium text-xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
             <div class="relative size-60 mt-10">
-                <svg class="size-full -rotate-90" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-zinc-800" stroke-width="3">
-                    </circle>
-                    <circle cx="18" cy="18" r="16" fill="none" class="stroke-pink-500" stroke-width="3"
-                        stroke-dasharray="100" :stroke-dashoffset="percentage" stroke-linecap="round"></circle>
+                <svg class="spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle stroke-linecap="round" class="progress stroke-pink-800" stroke-width='10'
+                        stroke-dasharray="20" fill="none" cx="50" cy="50" r="42" />
                 </svg>
-
                 <!-- Percentage Text -->
                 <div class="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
                     <div class="text-white flex items-center" style="overflow-x: hidden;">
@@ -155,4 +152,34 @@ onUnmounted(() => {
     </div>
 </template>
 
-<style></style>
+<style>
+@keyframes progress {
+    0% {
+        stroke-dasharray: 20;
+    }
+
+    100% {
+        stroke-dasharray: 283;
+    }
+}
+
+@keyframes svg--animation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(720deg)
+    }
+}
+
+.progress {
+    animation: progress 10s ease-in infinite;
+    animation-direction: alternate-reverse;
+}
+
+.spinner {
+    animation: 10s ease-in infinite svg--animation;
+    animation-direction: alternate-reverse;
+}
+</style>
