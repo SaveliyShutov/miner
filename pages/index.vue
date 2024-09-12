@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import gsap from "gsap"
 import { DailyModal } from '#components'
+import type { RefSymbol } from "@vue/reactivity";
 
 const userStore = useAuth()
 const modal = useModal()
@@ -13,6 +14,7 @@ let timeLeft = ref<string>('')
 let startTokenCount: number = 0;
 let currentTokenCount = ref<number>(0)
 let percentage = ref<number>(0)
+let showNumber = ref<boolean>(false)
 
 // это нужно, чтобы использовать метод clearInterval
 let intervalFunctionId: any;
@@ -36,7 +38,7 @@ async function getTimeLeft() {
         if (!submitted.value) {
             if (!userStore.user?.isClaimed) {
                 currentTokenCount.value += 8 * 60 * 60 * 0.1
-                percentage.value = 100 - Math.floor((currentTokenCount.value % 1) * Math.pow(10, 2)) * 100;
+                percentage.value = Math.round((currentTokenCount.value - Math.trunc(currentTokenCount.value)) * 100)
                 await userStore.setTokenCount(currentTokenCount.value)
             }
         }
@@ -46,8 +48,46 @@ async function getTimeLeft() {
     }
     // если время не закончилось, то начислить токены, которые он заработал за это время
     // В БАЗУ !НЕ! ОТПРАВЛЯТЬ
-    currentTokenCount.value = startTokenCount + timePassed * 0.1
-    percentage.value = Math.round(100 - (currentTokenCount.value - Math.trunc(currentTokenCount.value)) * 100)
+
+    currentTokenCount.value = startTokenCount + timePassed * 0.01
+    percentage.value = Math.round((currentTokenCount.value - Math.trunc(currentTokenCount.value)) * 100)
+
+    if (percentage.value == 0) {
+        showNumber.value = true
+        let percContainer = document.getElementById('percentage')
+        let plus = document.createElement('p');
+        plus.textContent = '+1';
+        plus.classList.add('unbounded-bold', 'overflow-hidden', 'text-5xl', 'text-white')
+
+        percContainer?.appendChild(plus)
+
+        const tl = gsap.timeline()
+        tl.fromTo(plus, {
+            scale: 0.5,
+            opacity: 0,
+        }, {
+            scale: 2,
+            opacity: 1,
+            duration: 1
+        })
+            .to(plus, {
+                scale: 0.5,
+                opacity: 0,
+            });
+        setTimeout(async () => {
+            showNumber.value = false;
+            percContainer?.removeChild(plus);
+            timeLeft.value = await getTimeLeft()
+            let tokenCountText = document.getElementById('token-count')
+            if (tokenCountText) {
+                gsap.to(tokenCountText, {
+                    duration: 0.5,
+                    text: String((Math.floor(currentTokenCount.value))),
+                })
+            }
+        }, 1000);
+    }
+
 
     let hours = Math.floor(delta / 60 / 60)
     let minutes = Math.floor((delta - hours * 60 * 60) / 60)
@@ -64,6 +104,7 @@ function setMargin(newWindowHeight: number) {
         pageContainer.value.style.paddingBottom = '0px'
     }
 }
+
 async function startEarn() {
     await userStore.startEarn()
     intervalFunctionId = setInterval(async () => {
@@ -71,8 +112,8 @@ async function startEarn() {
         let tokenCountElement = document.getElementById('token-count')
         if (tokenCountElement) {
             gsap.to(tokenCountElement, {
-                duration: 0.41,
-                text: String(Math.floor(currentTokenCount.value)),
+                duration: 0.1,
+                text: String((currentTokenCount.value)),
             })
         }
     }, 1000)
@@ -85,26 +126,38 @@ watch(user, (newUser) => {
     currentTokenCount.value = userStore.user?.tokenCount ?? 0
     startTokenCount = userStore.user?.tokenCount ?? 0
 })
+
 onMounted(async () => {
     setMargin(height.value)
 
     if (!timeLeft) {
         modal.open(DailyModal)
     }
+
     currentTokenCount.value = userStore.user?.tokenCount ?? 0
     startTokenCount = userStore.user?.tokenCount ?? 0
 
     timeLeft.value = await getTimeLeft()
+    let tokenCountText = document.getElementById('token-count')
+    if (tokenCountText) {
+        timeLeft.value = await getTimeLeft()
+        gsap.to(tokenCountText, {
+            duration: 0.1,
+            text: String(((currentTokenCount.value).toFixed(2))),
+        })
+    }
+
     intervalFunctionId = setInterval(async () => {
         timeLeft.value = await getTimeLeft()
         let tokenCountText = document.getElementById('token-count')
         if (tokenCountText) {
             gsap.to(tokenCountText, {
-                duration: 0.41,
-                text: String((Math.floor(currentTokenCount.value))),
+                duration: 0.1,
+                text: String(((currentTokenCount.value).toFixed(2))),
             })
         }
     }, 1000)
+
 })
 onUnmounted(() => {
     clearInterval(intervalFunctionId);
@@ -118,14 +171,10 @@ onUnmounted(() => {
             </div>
             <span class="mt-3 unbounded-medium text-xl text-white">{{ userStore.user?.first_name }} {{
                 userStore.user?.last_name }}</span>
-            <div class="relative size-60 mt-10">
-                <svg class="spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle stroke-linecap="round" class="progress stroke-pink-800" stroke-width='10'
-                        stroke-dasharray="20" fill="none" cx="50" cy="50" r="42" />
-                </svg>
-                <!-- Percentage Text -->
-                <div class="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                    <div class="text-white flex items-center" style="overflow-x: hidden;">
+
+            <div class="mt-10">
+                <div id="percentage" class="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                    <div v-if="!showNumber" class="text-white flex items-center" style="overflow-x: hidden;">
                         <p class="unbounded-bold overflow-hidden text-5xl" id="token-count"></p>
                     </div>
                 </div>
@@ -153,33 +202,4 @@ onUnmounted(() => {
 </template>
 
 <style>
-@keyframes progress {
-    0% {
-        stroke-dasharray: 20;
-    }
-
-    100% {
-        stroke-dasharray: 283;
-    }
-}
-
-@keyframes svg--animation {
-    0% {
-        transform: rotateZ(0deg);
-    }
-
-    100% {
-        transform: rotateZ(720deg)
-    }
-}
-
-.progress {
-    animation: progress 10s ease-in infinite;
-    animation-direction: alternate-reverse;
-}
-
-.spinner {
-    animation: 10s ease-in infinite svg--animation;
-    animation-direction: alternate-reverse;
-}
 </style>

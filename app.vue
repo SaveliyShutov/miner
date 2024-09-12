@@ -24,7 +24,7 @@ onMounted(async () => {
   }
   _window.Telegram.WebApp.setHeaderColor('#121212')
   let friendTgId = _window.Telegram.WebApp?.initDataUnsafe?.start_param
-  console.log(friendTgId);
+  // console.log(friendTgId);
   // в dev нет user, поэтому используем подставного
   if (user?.id) {
     console.log('logged in user:', user);
